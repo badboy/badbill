@@ -9,7 +9,8 @@ class Billomat
   class Invoice < BaseResource
     # Public: Get the PDF invoice.
     #
-    # Returns a Hash-like object containing the ID, filesize, base64file and other parameters.
+    # Returns a Hash-like object containing the ID, filesize, base64file and
+    # other parameters.
     # See http://www.billomat.com/en/api/invoices for all parameters.
     def pdf
       resp = get resource_name, "#{id}/pdf"
@@ -25,12 +26,15 @@ class Billomat
     def complete template_id=nil
       data = { complete: {} }
       data[:complete] = { template_id: template_id } if template_id
-      put resource_name, "#{id}/complete", data
+      resp = put resource_name, "#{id}/complete", data
+
+      !resp
     end
 
     # Public: Cancel an invoice.
     def cancel
-      put resource_name, "#{id}/cancel"
+      resp = put resource_name, "#{id}/cancel"
+      !resp
     end
 
     # Public: Sends an invoice by email.
@@ -66,9 +70,11 @@ class Billomat
       data[:subject] = subject if subject
       data[:body]    = body    if body
 
-      data.merge more
+      data.merge! more
       data[:recipients][:to] = to
-      post resource_name, "#{id}/email", data
+
+      resp = post resource_name, "#{id}/email", email: data
+      !resp
     end
 
     # Public: Uploads a digital signature for a given invoice.
