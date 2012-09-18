@@ -36,7 +36,7 @@ describe Billomat::Invoice do
     before :each do
       stub_request(:get, "ruby.billomat.net/api/invoices/1").
         with(:headers => {'Accept' => 'application/json'}).
-        to_return(:body => '{"invoice":{"id":1}}',
+        to_return(:body => '{"invoice":{"id":1,"status":"DRAFT"}}',
                   :headers => {'Content-Type' => 'application/json'})
 
       @invoice = Billomat::Invoice.find 1
@@ -57,6 +57,15 @@ describe Billomat::Invoice do
         to_return(:status => 200)
 
       @invoice.cancel.should == true
+      stub.should have_been_requested
+    end
+
+    it "deletes an invoice" do
+      stub = stub_request(:delete, "ruby.billomat.net/api/invoices/1").
+        with(:headers => {'Accept' => 'application/json'}).
+        to_return(:status => 200)
+
+      @invoice.delete.should == true
       stub.should have_been_requested
     end
 
@@ -86,48 +95,134 @@ describe Billomat::Invoice do
       pdf.invoice_id == 1
     end
 
-    it "sends an invoice via mail" do
-      body = {
-        "email" => {
-          "from" => "sender@test.example",
-          "recipients" => {
-            "to" => "recv@test.example",
-            "cc" => "mail@test.example"
-          },
-          "subject" => "subject",
-          "body" => "body",
-          "filename" => "invoice",
-          "attachments" => {
-            "attachment" => {
-              "filename" => "more.pdf",
-              "mimetype" => "application/pdf",
-              "base64file" => "foobar"
+    it "uploads a signature" do
+      body = {"signature" => {"base64file" => "cnVieQ==\n"}}
+      stub = stub_request(:put, "ruby.billomat.net/api/invoices/1/upload-signature").
+        with(:headers => {'Accept' => 'application/json'}, :body => body).
+        to_return(:status => 200)
+
+      @invoice.status = "OPEN"
+      file_content = StringIO.new "ruby"
+      resp = @invoice.upload_signature file_content
+      resp.should == true
+
+      stub.should have_been_requested
+    end
+
+    context "sending invoice as mail" do
+      it "sends an invoice via mail" do
+        body = {
+          "email" => {
+            "from" => "sender@test.example",
+            "recipients" => {
+              "to" => "recv@test.example",
+              "cc" => "mail@test.example"
+            },
+            "subject" => "subject",
+            "body" => "body",
+            "filename" => "invoice",
+            "attachments" => {
+              "attachment" => {
+                "filename" => "more.pdf",
+                "mimetype" => "application/pdf",
+                "base64file" => "foobar"
+              }
             }
           }
         }
-      }
 
-      stub = stub_request(:post, "ruby.billomat.net/api/invoices/1/email").
-        with(:headers => {'Accept' => 'application/json'}, :body => body).
-        to_return(:headers => {
+        stub = stub_request(:post, "ruby.billomat.net/api/invoices/1/email").
+          with(:headers => {'Accept' => 'application/json'}, :body => body).
+          to_return(:headers => {
           'Content-Type' => 'application/json'
         })
 
-      resp = @invoice.email "recv@test.example", "sender@test.example",
+        resp = @invoice.email "recv@test.example", "sender@test.example",
         "subject", "body", {
-        recipients: { cc: "mail@test.example" },
-        filename: "invoice",
-        attachments: {
-          attachment: {
-            filename: "more.pdf",
-            mimetype: "application/pdf",
-            base64file: "foobar"
+          recipients: { cc: "mail@test.example" },
+          filename: "invoice",
+          attachments: {
+            attachment: {
+              filename: "more.pdf",
+              mimetype: "application/pdf",
+              base64file: "foobar"
+            }
           }
         }
-      }
 
-      stub.should have_been_requested
-      resp.should == true
+        stub.should have_been_requested
+        resp.should == true
+      end
+
+      it "sends an invoice with only basic information" do
+        body = {
+          "email" => {
+            "recipients" => {
+              "to" => "recv@test.example",
+              "cc" => "mail@test.example",
+            }
+          }
+        }
+
+        stub = stub_request(:post, "ruby.billomat.net/api/invoices/1/email").
+          with(:headers => {'Accept' => 'application/json'}, :body => body).
+          to_return(:headers => {
+          'Content-Type' => 'application/json'
+        })
+
+        resp = @invoice.email "recv@test.example", {recipients: { cc: "mail@test.example" }}
+
+        stub.should have_been_requested
+        resp.should == true
+      end
+
+      it "sends an invoice with basic information and from" do
+        body = {
+          "email" => {
+            "recipients" => {
+              "to" => "recv@test.example",
+              "cc" => "mail@test.example",
+            },
+            "from" => "sender@test.example"
+          }
+        }
+
+        stub = stub_request(:post, "ruby.billomat.net/api/invoices/1/email").
+          with(:headers => {'Accept' => 'application/json'}, :body => body).
+          to_return(:headers => {
+          'Content-Type' => 'application/json'
+        })
+
+        resp = @invoice.email "recv@test.example", "sender@test.example", {recipients: { cc: "mail@test.example" }}
+
+        stub.should have_been_requested
+        resp.should == true
+      end
+
+      it "sends an invoice with basic information, from and subject" do
+        body = {
+          "email" => {
+            "recipients" => {
+              "to" => "recv@test.example",
+              "cc" => "mail@test.example",
+            },
+            "from" => "sender@test.example",
+            "subject" => "subject"
+          }
+        }
+
+        stub = stub_request(:post, "ruby.billomat.net/api/invoices/1/email").
+          with(:headers => {'Accept' => 'application/json'}, :body => body).
+          to_return(:headers => {
+          'Content-Type' => 'application/json'
+        })
+
+        resp = @invoice.email "recv@test.example", "sender@test.example", "subject",
+          {recipients: { cc: "mail@test.example" }}
+
+        stub.should have_been_requested
+        resp.should == true
+      end
     end
   end
 end

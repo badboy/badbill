@@ -33,6 +33,16 @@ describe Billomat do
       stub.should have_been_requested
     end
 
+    it "sends a GET request with parameters to the API" do
+      stub = stub_request(:get, "ruby.billomat.net/api/resource/?option=foobar").
+        with(:headers => {'X-BillomatApiKey' => '12345',
+          'Accept' => /application\/json/}).
+        to_return(:body => "{}")
+
+      @billomat.get 'resource', option: "foobar"
+      stub.should have_been_requested
+    end
+
     it "sends a POST request to the API" do
       stub = stub_request(:post, "ruby.billomat.net/api/").
         with(:headers => {'X-BillomatApiKey' => '12345',
@@ -62,6 +72,17 @@ describe Billomat do
         to_return(:body => "{}")
 
       @billomat.delete ''
+      stub.should have_been_requested
+    end
+
+    it "returns an error object on HTTP errors" do
+      stub = stub_request(:get, "ruby.billomat.net/api/resource/").
+        with(:headers => {'X-BillomatApiKey' => '12345',
+          'Accept' => /application\/json/}).
+        to_return(:status => 404)
+
+      resp = @billomat.get 'resource'
+      resp.error.kind_of?(Faraday::Error::ClientError).should == true
       stub.should have_been_requested
     end
   end
