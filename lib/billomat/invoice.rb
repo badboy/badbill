@@ -59,17 +59,17 @@ class Billomat
     def email to, from=nil, subject=nil, body=nil, more={}
       data = { recipients: {} }
 
-      if !more && from.kind_of?(Hash)
+      if more.empty? && from.kind_of?(Hash)
         more = from
         from = nil
       end
 
-      if !more && subject.kind_of?(Hash)
+      if more.empty? && subject.kind_of?(Hash)
         more = subject
         subject = nil
       end
 
-      if !more && body.kind_of?(Hash)
+      if more.empty? && body.kind_of?(Hash)
         more = body
         body = nil
       end
