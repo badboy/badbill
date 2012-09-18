@@ -11,7 +11,7 @@ require_relative 'billomat/base_resource'
 require_relative 'billomat/client'
 require_relative 'billomat/invoice'
 
-# Public: Handles the connection and requests to the Billomat API.
+# Handles the connection and requests to the Billomat API.
 #
 # This class can be used for direct API access and is used for connections from
 # resource classes.
@@ -20,20 +20,26 @@ require_relative 'billomat/invoice'
 #
 # Examples:
 #
-#     billo = Billomat.new 'ruby', '1234568' => #<Billomat:0x00000002825710
-#     ...> billo.get 'clients' => {"clients"=>{"client"=>[...]}}
+#     billo = Billomat.new 'ruby', '1234568'
+#     # => #<Billomat:0x00000002825710     ...>
+#     billo.get 'clients'
+#     # => {"clients"=>{"client"=>[...]}}
 class Billomat
+  # Reject any not allowed HTTP method.
   class NotAllowedException < Exception; end
+  # Fail if no global connection is set.
   class NoConnection < Exception; end
 
+  # The API url used for all connections.
   API_URL = 'http%s://%s.billomat.net/'
+  # Allowed HTTP methods.
   ALLOWED_METHODS = [:get, :post, :put, :delete]
 
-  # Public: Create new Billomat connection.
+  # Create new Billomat connection.
   #
-  # billomat_id - The String used as your BillomatID
-  # api_key     - The String key to authenticate to the API.
-  # ssl         - Wether to use SSL or not (only possible for paying customers, default: false)
+  # @param [String] billomat_id Used as your BillomatID
+  # @param [String] api_key     API Key used to authenticate to the API.
+  # @param [Boolean] ssl        Wether to use SSL or not (only possible for paying customers)
   def initialize billomat_id, api_key, ssl=false
     @billomat_id  = billomat_id
     @api_key      = api_key
@@ -43,27 +49,32 @@ class Billomat
     Billomat.connection = self
   end
 
-  # Private: assign global Billomat connection object.
+  # Assign global Billomat connection object.
+  #
+  # @param [Billomat] connection The connection object.
   def self.connection= connection
     @connection = connection
   end
 
+  # Get the global connection object.
+  #
+  # @return [Billomat, nil] The global connection object or nil if not set.
   def self.connection
     @connection
   end
 
-  # Public: Call the specified resource.
-  #
-  # resource - The String resource name (gets prepended with /api/).
-  # id       - The ID for the resource (may be a String or an Integer, default: '').
-  # options  - A Hash containing all parameters for this request (default: nil).
-  #            Exact parameters depend on the resource.
-  # method   - One of ALLOWED_METHODS (default: :get).
+  # Call the specified resource.
   #
   # It sets the X-BillomatApiKey header, the Content-Type header and the Accept header.
   #
-  # Returns the response body as a Hashie::Mash.
-  # On error the return value only includes the key :error.
+  # @param [String] resource    The String resource name (gets prepended with _/api/_).
+  # @param [String,Integer] id  The ID for the resource.
+  # @param [Hash] options       All parameters for this request.
+  #                             Exact parameters depend on the resource.
+  # @param [Symbol] method      One of ALLOWED_METHODS.
+  #
+  # @return [Hashie::Mash] The response body.
+  #                        On error the return value only includes the key :error.
   def call resource, id='', options=nil, method=:get
     raise NotAllowedException.new("#{method.inspect} is not allowed. Use one of [:#{ALLOWED_METHODS*', :'}]") unless ALLOWED_METHODS.include?(method)
 
@@ -88,35 +99,42 @@ class Billomat
     Hashie::Mash.new :error => error
   end
 
-  # Public: Send a GET request.
+  # Send a GET request.
   #
-  # See #call for arguments.
+  # @param (see #call)
+  # @return (see #call)
   def get resource, id='', options=nil
     call resource, id, options, :get
   end
 
-  # Public: Send a POST request.
+  # Send a POST request.
   #
-  # See #call for arguments.
+  # @param (see #call)
+  # @return (see #call)
   def post resource, id='', options=nil
     call resource, id, options, :post
   end
 
-  # Public: Send a PUT request.
+  # Send a PUT request.
   #
-  # See #call for arguments.
+  # @param (see #call)
+  # @return (see #call)
   def put resource, id='', options=nil
     call resource, id, options, :put
   end
 
-  # Public: Send a DELETE request.
+  # Send a DELETE request.
   #
-  # See #call for arguments.
+  # @param (see #call)
+  # @return (see #call)
   def delete resource, id='', options=nil
     call resource, id, options, :delete
   end
 
-  # Private: Creates a new Faraday connection object.
+  private
+  # Creates a new Faraday connection object.
+  #
+  # @return [Faraday] new connection object with url and response handling set.
   def connection
     @connection ||= Faraday.new(API_URL % [@ssl ? 's' : '', @billomat_id]) do |conn|
       conn.request :json

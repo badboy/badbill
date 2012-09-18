@@ -33,44 +33,40 @@ Requirements are listed in the `Gemfile`.
 
 ### Basic Usage
 
-```ruby
-bill = Billomat.new "billo", "18e40e14"
-# => #<Billomat:0x00000001319d30 ...>
-bill.get 'settings'
-# => {"settings"=>
-#   {"invoice_intro"=>"",
-#    "invoice_note"=>"",
-#    ...}}
-bill.put 'settings', settings: { invoice_intro: "Intro" }
-# => {"settings"=>
-#   {"invoice_intro"=>"Intro",
-#    "invoice_note"=>"",
-#    ...}}
-```
+    bill = Billomat.new "billo", "18e40e14"
+    # => #<Billomat:0x00000001319d30 ...>
+    bill.get 'settings'
+    # => {"settings"=>
+    #   {"invoice_intro"=>"",
+    #    "invoice_note"=>"",
+    #    ...}}
+    bill.put 'settings', settings: { invoice_intro: "Intro" }
+    # => {"settings"=>
+    #   {"invoice_intro"=>"Intro",
+    #    "invoice_note"=>"",
+    #    ...}}
 
 ### Using defined resource classes
 
-```ruby
-Billomat.new "billo", "18e40e14"
+    Billomat.new "billo", "18e40e14"
 
-Billomat::Invoice.all
-# => [#<Billomat::Invoice:0x000000024caf98 @id="1" @data={...}>],
-      ...]
+    Billomat::Invoice.all
+    # => [#<Billomat::Invoice:0x000000024caf98 @id="1" @data={...}>],
+          ...]
 
-invoice = Billomat::Invoice.find(1)
-invoice.pdf
-# => {"id"=>"1",
-#     "created"=>"2012-09-17T13:58:42+02:00",
-#     "invoice_id"=>"322791",
-#     "filename"=>"Invoice 322791.pdf",
-#     "mimetype"=>"application/pdf",
-#     "filesize"=>"90811",
-#     "base64file"=>"JVBERi0xLjM..."}
-invoice.delete
-# => true
+    invoice = Billomat::Invoice.find(1)
+    invoice.pdf
+    # => {"id"=>"1",
+    #     "created"=>"2012-09-17T13:58:42+02:00",
+    #     "invoice_id"=>"322791",
+    #     "filename"=>"Invoice 322791.pdf",
+    #     "mimetype"=>"application/pdf",
+    #     "filesize"=>"90811",
+    #     "base64file"=>"JVBERi0xLjM..."}
+    invoice.delete
+    # => true
 
-Billomat::Invoice.create client_id: 1, date: "2012-09-18", note: "Thank you for your order", ...
-```
+    Billomat::Invoice.create client_id: 1, date: "2012-09-18", note: "Thank you for your order", ...
 
 ## Documentation
 

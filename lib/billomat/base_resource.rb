@@ -7,28 +7,30 @@ class Billomat
 
     include Billomat::ForwardMethods
 
+    # ID of the resource.
     attr_reader   :id
+    # All data in a Hash.
     attr_accessor :data
 
     # Public: Create new resource object.
     #
-    # id   - The String or Integer ID of the resource.
-    # data - A Hash-like object of data.
+    # @param [String,Integer] id The ID of the resource.
+    # @param [Hashie::Mash] data Resource data.
     #
     # All resources have an ID and data. Methods are proxied to the data object.
     #
-    # Returns a new resource.
+    # @return [Resource] A new resource.
     def initialize id, data
       @id   = id
       @data = data
     end
 
-    # Public: Get all resources of this type.
+    # Get all resources of this type.
     #
-    # filter - An Hash of filter parameters,
-    #          see the online documentation for allowed values.
+    # @param [Hash] filter An Hash of filter parameters,
+    #                      see the online documentation for allowed values.
     #
-    # Returns an Array of new resources.
+    # @return [Array<Resource>] All found resources.
     def self.all filter={}
       all = get resource_name, filter
       all.__send__(resource_name).__send__(resource_name_singular).map do |res|
@@ -36,41 +38,49 @@ class Billomat
       end
     end
 
-    # Public: Get the resource with the given ID.
+    # Get the resource with the given ID.
     #
-    # id - The String or Integer ID of the resource.
+    # @param [String,Integer] id ID of the resource.
     #
-    # Returns a new resource.
+    # @return [Resource] New resource with id and data set.
     def self.find id
       c = get resource_name, id
-      new id, c.__send__(resource_name)
+      new id, c.__send__(resource_name_singular)
     end
 
-    # Public: Create a new resource with the given parameters.
+    # Create a new resource with the given parameters.
     #
-    # params - A Hash-like object of data.
-    #          See the online documentation for allowed values.
+    # @param [Hash] params A Hash-like object of data.
+    #                      See the online documentation for allowed values.
+    #
+    # @return [Resource] New resource with id and data set.
     def self.create params
       res = post(resource_name, {resource_name_singular => params})
       res_data = res.__send__(resource_name_singular)
-      new res.data.id, res_data
+      new res_data.id, res_data
     end
 
-    # Public: Save any changed data.
+    # Save any changed data.
     #
+    # @return [Boolean] True if successfull, false otherwise.
     def save
       @data.id = id
-      put resource_name, id, {resource_name_singular => @data}
+      resp = put resource_name, id, {resource_name_singular => @data}
+      !resp
     end
 
-    # Public: Delete this resource.
-    def delete
-      delete resource_name, id
-    end
-
-    # Public: Protect overriding of the ID.
+    # Delete this resource.
     #
-    # Raises a NoMethodError because the ID may not be overwritten.
+    # @return [Boolean] True if successfull, false otherwise.
+    def delete
+      # Hack: We can't call #delete here, because we ARE #delete
+      resp = call resource_name, id, nil, :delete
+      !resp
+    end
+
+    # Protect overriding of the ID.
+    #
+    # @raise [NoMethodError] because the ID may not be overwritten.
     def id= *args
       raise NoMethodError, "undefined method `id=' for '#{self.inspect.sub(/ .+/, '>')}`"
     end
@@ -85,22 +95,22 @@ class Billomat
       self.class.resource_name
     end
 
-    # Private: The singular resource name for use with the API.
+    # The singular resource name for use with the API.
     #
     # By default this is just the Class name, but it may be overridden.
     # Make sure to overwrite resource_name, too.
     #
-    # Returns the singular String resource name.
+    # @return [String] The singular resource name.
     def self.resource_name_singular
       @resource_name_singular ||= self.name.split(/::/).last.downcase
     end
 
-    # Private: The resource name (plural) for use with the API.
+    # The resource name (plural) for use with the API.
     #
     # By default this is just the `resource_name_singular` with an appended 's'
     # See #resource_name_singular
     #
-    # Returns the String resource name.
+    # @return [String] The resource name.
     def self.resource_name
       @resource_name ||= "#{resource_name_singular}s"
     end
