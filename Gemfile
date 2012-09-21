@@ -1,6 +1,3 @@
-gem 'yajl-ruby'
-gem 'faraday'
-gem 'faraday_middleware'
-gem 'mash'
-gem 'rspec'
-gem 'webmock'
+source 'https://rubygems.org'
+
+gemspec
