@@ -1,4 +1,4 @@
-Billomat API Client
+BadBill - Billomat API Client
 ===================
 
 Simple but working API client for the [Billomat API](http://www.billomat.com/api/).
@@ -15,12 +15,12 @@ See the [API documentation][apidocu] for full documentation of all resources.
 
 ## What's working right now
 
-The basic Billomat class allows access to all resources. It includes no syntactic sugar to work with, instead it just returns the data as a hash. This works for basic usage.
+The basic BadBill class allows access to all resources. It includes no syntactic sugar to work with, instead it just returns the data as a hash. This works for basic usage.
 
 The following resources are currently implemented as its own class:
 
-* [clients](http://www.billomat.com/en/api/invoices/) (`Billomat::Client`)
-* [invoices](http://www.billomat.com/en/api/invoices/) (`Billomat::Invoices`)
+* [clients](http://www.billomat.com/en/api/invoices/) (`BadBill::Client`)
+* [invoices](http://www.billomat.com/en/api/invoices/) (`BadBill::Invoices`)
 
 These are the two I need right now.
 Implementing new resources is easy. Pull Requests for others are welcome.
@@ -33,8 +33,8 @@ Requirements are listed in the `Gemfile`.
 
 ### Basic Usage
 
-    bill = Billomat.new "billo", "18e40e14"
-    # => #<Billomat:0x00000001319d30 ...>
+    bill = BadBill.new "billo", "18e40e14"
+    # => #<BadBill:0x00000001319d30 ...>
     bill.get 'settings'
     # => {"settings"=>
     #   {"invoice_intro"=>"",
@@ -48,13 +48,12 @@ Requirements are listed in the `Gemfile`.
 
 ### Using defined resource classes
 
-    Billomat.new "billo", "18e40e14"
+    BadBill.new "billo", "18e40e14"
 
-    Billomat::Invoice.all
-    # => [#<Billomat::Invoice:0x000000024caf98 @id="1" @data={...}>],
-          ...]
+    BadBill::Invoice.all
+    # => [#<BadBill::Invoice:0x000000024caf98 @id="1" @data={...}>], ...]
 
-    invoice = Billomat::Invoice.find(1)
+    invoice = BadBill::Invoice.find(1)
     invoice.pdf
     # => {"id"=>"1",
     #     "created"=>"2012-09-17T13:58:42+02:00",
@@ -66,19 +65,20 @@ Requirements are listed in the `Gemfile`.
     invoice.delete
     # => true
 
-    Billomat::Invoice.create client_id: 1, date: "2012-09-18", note: "Thank you for your order", ...
+    BadBill::Invoice.create client_id: 1, date: "2012-09-18", note: "Thank you for your order", ...
 
 ## Documentation
 
-For now the documentation is just inline.
+Documentation is online at [rubydoc.info](http://rubydoc.info/github/badboy/badbill/master/frames).
+Generate locale documentation with `rake doc` ([yard](http://yardoc.org/) required).
 Required Parameters and possible values won't be documentated here. See the [API documentation][apidocu] for that.
 
 ## Contribute
 
-See `CONTRIBUTE.md` for info.
+See [CONTRIBUTING.md](/badboy/badbill/blob/master/CONTRIBUTING.md) for info.
 
 ## License
 
-See `LICENSE` for info.
+See [LICENSE](/badboy/badbill/blob/master/LICENSE) for info.
 
 [apidocu]: http://www.billomat.com/en/api/settings/
