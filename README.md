@@ -1,7 +1,7 @@
 BadBill - Billomat API Client
 ===================
 
-Simple but working API client for the [Billomat API](http://www.billomat.com/api/).
+Simple but working API client for the [Billomat API][apidocu].
 
 See the [API documentation][apidocu] for full documentation of all resources.
 
@@ -27,7 +27,10 @@ Implementing new resources is easy. Pull Requests for others are welcome.
 
 ## Requirements
 
-Requirements are listed in the `Gemfile`.
+* [yajl-ruby](https://github.com/brianmario/yajl-ruby)
+* [faraday](https://github.com/technoweenie/faraday)
+* [faraday_middleware](https://github.com/pengwynn/faraday_middleware)
+* [hashie](https://github.com/intridea/hashie)
 
 ## Examples
 
@@ -70,6 +73,7 @@ Requirements are listed in the `Gemfile`.
 ## Documentation
 
 Documentation is online at [rubydoc.info](http://rubydoc.info/github/badboy/badbill/master/frames).
+
 Generate locale documentation with `rake doc` ([yard](http://yardoc.org/) required).
 Required Parameters and possible values won't be documentated here. See the [API documentation][apidocu] for that.
 
@@ -81,4 +85,4 @@ See [CONTRIBUTING.md](/badboy/badbill/blob/master/CONTRIBUTING.md) for info.
 
 See [LICENSE](/badboy/badbill/blob/master/LICENSE) for info.
 
-[apidocu]: http://www.billomat.com/en/api/settings/
+[apidocu]: http://www.billomat.com/en/api/
