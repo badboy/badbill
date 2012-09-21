@@ -3,7 +3,7 @@
 class BadBill
   # Forward requests to the underlying connection object.
   #
-  # This module is included in Billomat::BaseResource.
+  # This module is included in BadBill::BaseResource.
   module Resource
     # @param (see BadBill#get)
     def get resource, id='', options=nil
