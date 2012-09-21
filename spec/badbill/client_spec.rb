@@ -2,9 +2,9 @@
 
 require_relative '../helper'
 
-describe Billomat::Client do
+describe BadBill::Client do
   before :all do
-    @billomat = Billomat.new "ruby", "12345"
+    @badbill = BadBill.new "ruby", "12345"
   end
 
   it "fetches all clients" do
@@ -13,7 +13,7 @@ describe Billomat::Client do
       to_return(:body => '{"clients":{"client":[{"id":1}]}}',
                :headers => {'Content-Type' => 'application/json'})
 
-    resp = Billomat::Client.all
+    resp = BadBill::Client.all
     stub.should have_been_requested
 
     resp.size.should == 1
@@ -26,7 +26,7 @@ describe Billomat::Client do
       to_return(:body => '{"client":{"id":1}}',
                :headers => {'Content-Type' => 'application/json'})
 
-    resp = Billomat::Client.myself
+    resp = BadBill::Client.myself
     stub.should have_been_requested
 
     resp.id.should == 1
@@ -39,7 +39,7 @@ describe Billomat::Client do
       to_return(:body => '{"client":{"id":1}}',
                :headers => {'Content-Type' => 'application/json'})
 
-    resp = Billomat::Client.find 1
+    resp = BadBill::Client.find 1
     stub.should have_been_requested
 
     resp.id.should == 1
@@ -53,7 +53,7 @@ describe Billomat::Client do
       to_return(:body => body,
                :headers => {'Content-Type' => 'application/json'})
 
-    client = Billomat::Client.find 1
+    client = BadBill::Client.find 1
 
     body = { client: {name: "new name", "id" => 1} }
     stub = stub_request(:put, "ruby.billomat.net/api/clients/1").
@@ -84,7 +84,6 @@ describe Billomat::Client do
     body_return = { "client" => body["client"].dup }
     body_return["client"]["id"] = 42
     body_return["client"]["created"] = "2007-12-13T12:12:00+01:00"
-    #require 'pry'; binding.pry
 
     stub = stub_request(:post, "ruby.billomat.net/api/clients/").
       with(:body => body.to_json, :headers => {'Accept' => 'application/json',
@@ -92,7 +91,7 @@ describe Billomat::Client do
       to_return(:status => 201, :body => body_return,
                 :headers => {'Content-Type' => 'application/json'})
 
-    client = Billomat::Client.create body["client"]
+    client = BadBill::Client.create body["client"]
     stub.should have_been_requested
     client.id.should == 42
   end

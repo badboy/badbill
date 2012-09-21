@@ -21,4 +21,4 @@ require 'webmock/rspec'
 here = File.expand_path(File.dirname(__FILE__) + '/..')
 $LOAD_PATH.unshift here+'/lib'
 
-require 'billomat'
+require 'badbill'

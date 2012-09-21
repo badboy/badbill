@@ -2,16 +2,16 @@
 
 require_relative 'helper'
 
-describe Billomat do
+describe BadBill do
   it "creates new global connection object" do
-    Billomat.connection.should be_nil
-    b = Billomat.new "ruby", "12345"
-    Billomat.connection.should_not be_nil
+    BadBill.connection.should be_nil
+    b = BadBill.new "ruby", "12345"
+    BadBill.connection.should_not be_nil
   end
 
   context "sending requests" do
     before :each do
-      @billomat = Billomat.new "ruby", "12345"
+      @badbill = BadBill.new "ruby", "12345"
     end
 
     it "sends a specified request to the API" do
@@ -19,7 +19,7 @@ describe Billomat do
         with(:headers => {'Accept' => /application\/json/}).
         to_return(:body => "{}")
 
-      @billomat.call ''
+      @badbill.call ''
       stub.should have_been_requested
     end
 
@@ -29,7 +29,7 @@ describe Billomat do
           'Accept' => /application\/json/}).
         to_return(:body => "{}")
 
-      @billomat.get ''
+      @badbill.get ''
       stub.should have_been_requested
     end
 
@@ -39,7 +39,7 @@ describe Billomat do
           'Accept' => /application\/json/}).
         to_return(:body => "{}")
 
-      @billomat.get 'resource', option: "foobar"
+      @badbill.get 'resource', option: "foobar"
       stub.should have_been_requested
     end
 
@@ -50,7 +50,7 @@ describe Billomat do
           'Content-Type' => /application\/json/}).
         to_return(:body => "{}")
 
-      @billomat.post ''
+      @badbill.post ''
       stub.should have_been_requested
     end
 
@@ -61,7 +61,7 @@ describe Billomat do
           'Content-Type' => /application\/json/}).
         to_return(:body => "{}")
 
-      @billomat.put ''
+      @badbill.put ''
       stub.should have_been_requested
     end
 
@@ -71,7 +71,7 @@ describe Billomat do
           'Accept' => /application\/json/}).
         to_return(:body => "{}")
 
-      @billomat.delete ''
+      @badbill.delete ''
       stub.should have_been_requested
     end
 
@@ -81,7 +81,7 @@ describe Billomat do
           'Accept' => /application\/json/}).
         to_return(:status => 404)
 
-      resp = @billomat.get 'resource'
+      resp = @badbill.get 'resource'
       resp.error.kind_of?(Faraday::Error::ClientError).should == true
       stub.should have_been_requested
     end

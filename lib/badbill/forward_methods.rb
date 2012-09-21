@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Billomat
+class BadBill
   # Forward all methods to an underlying object called data.
   #
   # This acts like a proxy object.

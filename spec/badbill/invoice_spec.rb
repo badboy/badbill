@@ -2,9 +2,9 @@
 
 require_relative '../helper'
 
-describe Billomat::Invoice do
+describe BadBill::Invoice do
   before :all do
-    @billomat = Billomat.new "ruby", "12345"
+    @badbill = BadBill.new "ruby", "12345"
   end
 
   it "fetches all invoices" do
@@ -13,7 +13,7 @@ describe Billomat::Invoice do
       to_return(:body => '{"invoices":{"invoice":[{"id":1}]}}',
                :headers => {'Content-Type' => 'application/json'})
 
-    resp = Billomat::Invoice.all
+    resp = BadBill::Invoice.all
     stub.should have_been_requested
 
     resp.size.should == 1
@@ -26,7 +26,7 @@ describe Billomat::Invoice do
       to_return(:body => '{"invoice":{"id":1}}',
                :headers => {'Content-Type' => 'application/json'})
 
-    resp = Billomat::Invoice.find 1
+    resp = BadBill::Invoice.find 1
     stub.should have_been_requested
 
     resp.id.should == 1
@@ -39,7 +39,7 @@ describe Billomat::Invoice do
         to_return(:body => '{"invoice":{"id":1,"status":"DRAFT"}}',
                   :headers => {'Content-Type' => 'application/json'})
 
-      @invoice = Billomat::Invoice.find 1
+      @invoice = BadBill::Invoice.find 1
     end
 
     it "marks invoice as complete" do
@@ -70,17 +70,17 @@ describe Billomat::Invoice do
     end
 
     it "fetches the pdf" do
-      body = <<-EOF
-      {"pdf": {
-       "id": 1,
-        "created": "2009-09-02T12:04:15+02:00",
-        "invoice_id": 1,
-        "filename": "invoice_1.pdf",
-        "mimetype": "application/pdf",
-        "filesize": "1",
-        "base64file": "foobar"
-      }}
-      EOF
+      body = {
+        "pdf" => {
+         "id" => 1,
+          "created" => "2009-09-02T12 =>04 =>15+02 =>00",
+          "invoice_id" => 1,
+          "filename" => "invoice_1.pdf",
+          "mimetype" => "application/pdf",
+          "filesize" => "1",
+          "base64file" => "foobar"
+        }
+      }
 
       stub = stub_request(:get, "ruby.billomat.net/api/invoices/1/pdf").
         with(:headers => {'Accept' => 'application/json'}).

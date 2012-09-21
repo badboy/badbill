@@ -1,11 +1,11 @@
 # encoding: utf-8
 
-class Billomat
+class BadBill
   class BaseResource
-    include Billomat::Resource
-    extend Billomat::Resource
+    include BadBill::Resource
+    extend BadBill::Resource
 
-    include Billomat::ForwardMethods
+    include BadBill::ForwardMethods
 
     # ID of the resource.
     attr_reader   :id

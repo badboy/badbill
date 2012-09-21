@@ -4,12 +4,12 @@ require 'yajl/json_gem'
 require 'faraday_middleware'
 require 'hashie/mash'
 
-require_relative 'billomat/resource'
-require_relative 'billomat/forward_methods'
-require_relative 'billomat/base_resource'
+require_relative 'badbill/resource'
+require_relative 'badbill/forward_methods'
+require_relative 'badbill/base_resource'
 
-require_relative 'billomat/client'
-require_relative 'billomat/invoice'
+require_relative 'badbill/client'
+require_relative 'badbill/invoice'
 
 # Handles the connection and requests to the Billomat API.
 #
@@ -20,11 +20,13 @@ require_relative 'billomat/invoice'
 #
 # Examples:
 #
-#     billo = Billomat.new 'ruby', '1234568'
-#     # => #<Billomat:0x00000002825710     ...>
+#     billo = BadBill.new 'ruby', '1234568'
+#     # => #<BadBill:0x00000002825710     ...>
 #     billo.get 'clients'
 #     # => {"clients"=>{"client"=>[...]}}
-class Billomat
+class BadBill
+  VERSION = '0.0.1'
+
   # Reject any not allowed HTTP method.
   class NotAllowedException < Exception; end
   # Fail if no global connection is set.
@@ -46,19 +48,19 @@ class Billomat
     @ssl          = ssl
     @http_adapter = connection
 
-    Billomat.connection = self
+    BadBill.connection = self
   end
 
-  # Assign global Billomat connection object.
+  # Assign global BadBill connection object.
   #
-  # @param [Billomat] connection The connection object.
+  # @param [BadBill] connection The connection object.
   def self.connection= connection
     @connection = connection
   end
 
   # Get the global connection object.
   #
-  # @return [Billomat, nil] The global connection object or nil if not set.
+  # @return [BadBill, nil] The global connection object or nil if not set.
   def self.connection
     @connection
   end
@@ -141,7 +143,7 @@ class Billomat
 
       conn.response :mashify
       conn.response :json, :content_type => /\bjson$/
-      conn.response :logger
+      #conn.response :logger
       conn.response :raise_error
       conn.adapter  :net_http
       conn.options[:timeout] = 2

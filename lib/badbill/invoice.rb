@@ -2,7 +2,7 @@
 
 require 'base64'
 
-class Billomat
+class BadBill
   # The resource handles all invoices.
   #
   # See http://www.billomat.com/en/api/invoices

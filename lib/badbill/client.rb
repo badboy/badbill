@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Billomat
+class BadBill
   # The clients resource handles all clients.
   #
   # See http://www.billomat.com/en/api/clients/
