@@ -32,6 +32,10 @@ Implementing new resources is easy. Pull Requests for others are welcome.
 * [faraday_middleware](https://github.com/pengwynn/faraday_middleware)
 * [hashie](https://github.com/intridea/hashie)
 
+## Installation
+
+BadBill is just a `gem install badbill` away. Get an API key for the Billomat API on your profile page.
+
 ## Examples
 
 ### Basic Usage
