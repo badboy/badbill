@@ -2,3 +2,4 @@ coverage
 .yardoc
 doc
 pkg/
+.rake_tasks~
