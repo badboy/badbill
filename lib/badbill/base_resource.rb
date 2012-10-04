@@ -56,6 +56,7 @@ class BadBill
     # @return [Resource] New resource with id and data set.
     def self.create params
       res = post(resource_name, {resource_name_singular => params})
+      return res if res.error
       res_data = res.__send__(resource_name_singular)
       new res_data.id, res_data
     end

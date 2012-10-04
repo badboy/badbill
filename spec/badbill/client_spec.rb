@@ -95,4 +95,24 @@ describe BadBill::Client do
     stub.should have_been_requested
     client.id.should == 42
   end
+
+  context "create with wrong data" do
+    before do
+      @body = { "email" => "this@is.invalid" }
+      @body_return = {"errors"=>{"error"=>"invalid email address"}}
+
+      @stub = stub_request(:post, "ruby.billomat.net/api/clients/").
+        with(:body => ({'client' => @body}).to_json, :headers => {'Accept' => 'application/json',
+        'Content-Type'=>'application/json'}).
+        to_return(:status => 400, :body => @body_return,
+                  :headers => {'Content-Type' => 'application/json'})
+    end
+
+    it "returns an error" do
+      client = BadBill::Client.create @body
+
+      client.error.should be_a(Faraday::Error::ClientError)
+      @stub.should have_been_requested
+    end
+  end
 end
