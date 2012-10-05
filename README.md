@@ -19,10 +19,10 @@ The basic BadBill class allows access to all resources. It includes no syntactic
 
 The following resources are currently implemented as its own class:
 
-* [clients](http://www.billomat.com/en/api/invoices/) (`BadBill::Client`)
-* [invoices](http://www.billomat.com/en/api/invoices/) (`BadBill::Invoices`)
+* [clients](http://www.billomat.com/en/api/clients/) (`BadBill::Client`)
+* [invoices](http://www.billomat.com/en/api/invoices/) (`BadBill::Invoice`)
+* [invoice-payments](http://www.billomat.com/en/api/invoices/payments/) (`BadBill::InvoicePayment`)
 
-These are the two I need right now.
 Implementing new resources is easy. Pull Requests for others are welcome.
 
 ## Requirements
