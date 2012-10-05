@@ -108,7 +108,7 @@ class BadBill
     #
     # @return [String] The singular resource name.
     def self.resource_name_singular
-      @resource_name_singular ||= self.name.split(/::/).last.downcase
+      @resource_name_singular ||= self.name.split(/::/).last.split(/^|([A-Z][a-z]+)/).join('-').downcase
     end
 
     # The resource name (plural) for use with the API.
