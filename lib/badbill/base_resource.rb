@@ -33,6 +33,8 @@ class BadBill
     # @return [Array<Resource>] All found resources.
     def self.all filter={}
       all = get resource_name, filter
+      return all if all.error
+
       all.__send__(resource_name).__send__(resource_name_singular).map do |res|
         new res.id, res
       end
@@ -45,6 +47,8 @@ class BadBill
     # @return [Resource] New resource with id and data set.
     def self.find id
       c = get resource_name, id
+      return c if c.error
+
       new id, c.__send__(resource_name_singular)
     end
 
@@ -57,6 +61,7 @@ class BadBill
     def self.create params
       res = post(resource_name, {resource_name_singular => params})
       return res if res.error
+
       res_data = res.__send__(resource_name_singular)
       new res_data.id, res_data
     end
