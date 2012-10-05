@@ -11,6 +11,7 @@ require_relative 'badbill/base_resource'
 require_relative 'badbill/client'
 require_relative 'badbill/invoice'
 require_relative 'badbill/invoice_payment'
+require_relative 'badbill/invoice_item'
 
 # Handles the connection and requests to the Billomat API.
 #
