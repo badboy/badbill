@@ -1,6 +1,8 @@
 BadBill - Billomat API Client
 ===================
 
+(developed for internal use at [rrbone](http://www.rrbone.net))
+
 Simple but working API client for the [Billomat API][apidocu].
 
 See the [API documentation][apidocu] for full documentation of all resources.

@@ -1,4 +1,8 @@
 # encoding: utf-8
+#
+# Copyright (c) 2012 Jan-Erik Rediger <jer@rrbone.net>
+# See LICENSE for info.
+# Developed for internal use at rrbone (http://www.rrbone.net)
 
 require 'yajl/json_gem'
 require 'faraday_middleware'
