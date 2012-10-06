@@ -25,6 +25,7 @@ The following resources are currently implemented as its own class:
 * [invoices](http://www.billomat.com/en/api/invoices/) (`BadBill::Invoice`)
 * [invoice-payments](http://www.billomat.com/en/api/invoices/payments/) (`BadBill::InvoicePayment`)
 * [invoice-items](http://www.billomat.com/en/api/invoices/items/) (`BadBill::InvoiceItem`)
+* [recurring](http://www.billomat.com/en/api/recurrings/) (`BadBill::Recurring`)
 
 Implementing new resources is easy. Pull Requests for others are welcome.
 
