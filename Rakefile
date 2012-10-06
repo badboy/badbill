@@ -12,6 +12,10 @@ end
 task :default => :spec
 task :doc => :yard
 
+task :tags do
+  sh 'ctags -R --exclude=.git *'
+end
+
 ## helper functions
 
 def name
