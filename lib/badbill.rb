@@ -16,6 +16,7 @@ require_relative 'badbill/client'
 require_relative 'badbill/invoice'
 require_relative 'badbill/invoice_payment'
 require_relative 'badbill/invoice_item'
+require_relative 'badbill/recurring'
 
 # Handles the connection and requests to the Billomat API.
 #
@@ -31,7 +32,7 @@ require_relative 'badbill/invoice_item'
 #     billo.get 'clients'
 #     # => {"clients"=>{"client"=>[...]}}
 class BadBill
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
 
   # Reject any not allowed HTTP method.
   class NotAllowedException < Exception; end
