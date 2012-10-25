@@ -32,6 +32,19 @@ describe BadBill::Invoice do
     resp.id.should == 1
   end
 
+  it "fetches aggregated invoices" do
+    stub = stub_request(:get, "ruby.billomat.net/api/invoices/?group_by=client").
+      with(:headers => {'Accept' => 'application/json'}).
+      to_return(:body => '{"invoice-groups":{"invoice-group":[{"total_gross":"42.23"}]}}',
+               :headers => {'Content-Type' => 'application/json'})
+
+    resp = BadBill::Invoice.group_by :client
+    p resp
+    stub.should have_been_requested
+
+    resp.first.total_gross.should == "42.23"
+  end
+
   context "existing invoice" do
     before :each do
       stub_request(:get, "ruby.billomat.net/api/invoices/1").

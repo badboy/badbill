@@ -7,6 +7,30 @@ class BadBill
   #
   # See http://www.billomat.com/en/api/invoices
   class Invoice < BaseResource
+    # Get aggregated list of invoices.
+    #
+    # BE CAREFUL: The returned objects are not really invoices.
+    # See http://www.billomat.com/en/api/invoices/ for the format.
+    #
+    # @param [String,Symbol,#to_s] type One of ['client', 'status', 'day',
+    #                                   'week', 'month', 'year'].
+    #                                   Specify multiple types for finer
+    #                                   aggregation.
+    #
+    # @return [Array<Invoices>] All found resources.
+    def self.group_by *type
+      if type.respond_to?(:join)
+        type = type.join(',')
+      end
+
+      all = get resource_name, group_by: type
+
+      return all if all.error
+
+      all.__send__('invoice-groups').__send__('invoice-group').map do |res|
+        new res.id, res
+      end
+    end
     # Get the PDF invoice.
     #
     #
