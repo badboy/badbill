@@ -72,6 +72,11 @@ class BadBill
     @connection
   end
 
+  def self.clear_connection
+    @connection = nil
+  end
+
+
   # Call the specified resource.
   #
   # It sets the X-BillomatApiKey header, the Content-Type header and the Accept header.
