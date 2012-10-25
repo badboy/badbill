@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require_relative '../helper'
+require 'spec_helper'
 
 describe BadBill::BaseResource do
   it "can't set a new ID" do

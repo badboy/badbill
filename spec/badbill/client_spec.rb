@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require_relative '../helper'
+require 'spec_helper'
 
 describe BadBill::Client do
   before :all do

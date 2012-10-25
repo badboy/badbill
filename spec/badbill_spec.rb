@@ -1,8 +1,18 @@
 # encoding: utf-8
 
-require_relative 'helper'
+require 'spec_helper'
 
 describe BadBill do
+  before :each do
+    BadBill.clear_connection
+  end
+
+  after :each do
+    BadBill.clear_connection
+  end
+
+  DEFAULT_HEADERS = {'Accept' => /application\/json/, 'X-BillomatApiKey' => '12345' }
+
   it "creates new global connection object" do
     BadBill.connection.should be_nil
     b = BadBill.new "ruby", "12345"
@@ -16,7 +26,7 @@ describe BadBill do
 
     it "sends a specified request to the API" do
       stub = stub_request(:get, "ruby.billomat.net/api/").
-        with(:headers => {'Accept' => /application\/json/}).
+        with(headers: DEFAULT_HEADERS).
         to_return(:body => "{}")
 
       @badbill.call ''
@@ -25,8 +35,7 @@ describe BadBill do
 
     it "sends a GET request to the API" do
       stub = stub_request(:get, "ruby.billomat.net/api/").
-        with(:headers => {'X-BillomatApiKey' => '12345',
-          'Accept' => /application\/json/}).
+        with(headers: DEFAULT_HEADERS).
         to_return(:body => "{}")
 
       @badbill.get ''
@@ -35,8 +44,7 @@ describe BadBill do
 
     it "sends a GET request with parameters to the API" do
       stub = stub_request(:get, "ruby.billomat.net/api/resource/?option=foobar").
-        with(:headers => {'X-BillomatApiKey' => '12345',
-          'Accept' => /application\/json/}).
+        with(headers: DEFAULT_HEADERS).
         to_return(:body => "{}")
 
       @badbill.get 'resource', option: "foobar"
@@ -45,9 +53,7 @@ describe BadBill do
 
     it "sends a POST request to the API" do
       stub = stub_request(:post, "ruby.billomat.net/api/").
-        with(:headers => {'X-BillomatApiKey' => '12345',
-          'Accept' => /application\/json/,
-          'Content-Type' => /application\/json/}).
+        with(headers: DEFAULT_HEADERS.merge('Content-Type' => /application\/json/)).
         to_return(:body => "{}")
 
       @badbill.post ''
@@ -56,9 +62,7 @@ describe BadBill do
 
     it "sends a PUT request to the API" do
       stub = stub_request(:put, "ruby.billomat.net/api/").
-        with(:headers => {'X-BillomatApiKey' => '12345',
-          'Accept' => /application\/json/,
-          'Content-Type' => /application\/json/}).
+        with(headers: DEFAULT_HEADERS.merge('Content-Type' => /application\/json/)).
         to_return(:body => "{}")
 
       @badbill.put ''
@@ -67,8 +71,7 @@ describe BadBill do
 
     it "sends a DELETE request to the API" do
       stub = stub_request(:delete, "ruby.billomat.net/api/").
-        with(:headers => {'X-BillomatApiKey' => '12345',
-          'Accept' => /application\/json/}).
+        with(headers: DEFAULT_HEADERS).
         to_return(:body => "{}")
 
       @badbill.delete ''
@@ -77,8 +80,7 @@ describe BadBill do
 
     it "returns an error object on HTTP errors" do
       stub = stub_request(:get, "ruby.billomat.net/api/resource/").
-        with(:headers => {'X-BillomatApiKey' => '12345',
-          'Accept' => /application\/json/}).
+        with(headers: DEFAULT_HEADERS).
         to_return(:status => 404)
 
       resp = @badbill.get 'resource'

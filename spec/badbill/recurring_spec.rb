@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require_relative '../helper'
+require 'spec_helper'
 
 describe BadBill::Recurring do
   before :all do
