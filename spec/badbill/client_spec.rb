@@ -55,6 +55,18 @@ describe BadBill::Client do
     resp.myself?.should == false
   end
 
+  it "returns nil when no client found" do
+    stub = stub_request(:get, "ruby.billomat.net/api/clients/1").
+      with(:headers => {'Accept' => 'application/json'}).
+      to_return(:status => 404, :body => '{"errors":{"error":"Row not found"}}',
+               :headers => {'Content-Type' => 'application/json'})
+
+    resp = BadBill::Client.find 1
+    stub.should have_been_requested
+
+    resp.should be_nil
+  end
+
   it "saves changes to client data" do
     body = { client: {name: "old name", "id" => 1} }
     stub_request(:get, "ruby.billomat.net/api/clients/1").

@@ -55,9 +55,17 @@ class BadBill
     # @return [Resource] New resource with id and data set.
     def self.find id
       c = get resource_name, id
-      return c if c.error
+      if c.error
+        if c.error.kind_of? Faraday::Error::ResourceNotFound
+          return nil
+        else
+          return c
+        end
+      end
 
-      new id, c.__send__(resource_name_singular)
+      data = c.__send__(resource_name_singular)
+      return nil if data.nil?
+      new id, data
     end
 
     # Create a new resource with the given parameters.
@@ -97,6 +105,14 @@ class BadBill
     # @raise [NoMethodError] because the ID may not be overwritten.
     def id= *args
       raise NoMethodError, "undefined method `id=' for '#{self.inspect.sub(/ .+/, '>')}`"
+    end
+
+    def error
+      if @data.respond_to?(:error)
+        @data.error
+      else
+        nil
+      end
     end
 
     private
