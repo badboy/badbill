@@ -8,9 +8,17 @@ describe BadBill::Recurring do
   end
 
   it "fetches all recurring invoices" do
+    body = {
+      'recurrings' => {
+        'recurring' => {
+          id: 1
+        },
+        '@total' => 1
+      }
+    }
     stub = stub_request(:get, "ruby.billomat.net/api/recurrings/").
       with(:headers => {'Accept' => 'application/json'}).
-      to_return(:body => '{"recurrings":{"recurring":[{"id":1}]}}',
+      to_return(:body => body,
                :headers => {'Content-Type' => 'application/json'})
 
     resp = BadBill::Recurring.all

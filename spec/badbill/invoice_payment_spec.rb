@@ -8,9 +8,17 @@ describe BadBill::InvoicePayment do
   end
 
   it "fetches all invoice-payments" do
+    body = {
+      'invoice-payments' => {
+        'invoice-payment' => {
+          id: 1
+        },
+        '@total' => 1
+      }
+    }
     stub = stub_request(:get, "ruby.billomat.net/api/invoice-payments/").
       with(:headers => {'Accept' => 'application/json'}).
-      to_return(:body => '{"invoice-payments":{"invoice-payment":[{"id":1}]}}',
+      to_return(:body => body,
                :headers => {'Content-Type' => 'application/json'})
 
     resp = BadBill::InvoicePayment.all

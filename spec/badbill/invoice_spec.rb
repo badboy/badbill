@@ -8,9 +8,17 @@ describe BadBill::Invoice do
   end
 
   it "fetches all invoices" do
+    body = {
+      'invoices' => {
+        'invoice' => {
+          id: 1
+        },
+        '@total' => 1
+      }
+    }
     stub = stub_request(:get, "ruby.billomat.net/api/invoices/").
       with(:headers => {'Accept' => 'application/json'}).
-      to_return(:body => '{"invoices":{"invoice":[{"id":1}]}}',
+      to_return(:body => body,
                :headers => {'Content-Type' => 'application/json'})
 
     resp = BadBill::Invoice.all
@@ -39,7 +47,6 @@ describe BadBill::Invoice do
                :headers => {'Content-Type' => 'application/json'})
 
     resp = BadBill::Invoice.group_by :client
-    p resp
     stub.should have_been_requested
 
     resp.first.total_gross.should == "42.23"
