@@ -110,7 +110,12 @@ class BadBill
       req.body = options if method != :get && options && !options.empty?
     }.body
   rescue Faraday::Error::ClientError => error
-    Hashie::Mash.new :error => error
+    if error.response && error.response.has_key?(:body) && error.response[:body]
+      body = error.response[:body]
+      Hashie::Mash.new :error => error, :body => ( body.kind_of?(Hash) ? body : JSON.parse(body) )
+    else
+      Hashie::Mash.new :error => error
+    end
   end
 
   # Send a GET request.
