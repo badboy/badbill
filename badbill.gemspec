@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.5") if s.respond_to? :required_rubygems_version=
 
   s.name    = 'badbill'
-  s.version = '0.0.2'
+  s.version = '0.0.3dev'
 
   s.summary     = "Simple but working API client for the Billomat API."
   s.description = <<-EOF
@@ -26,6 +26,7 @@ Fast and easy access to all resources the Billomat API provides (not all resourc
     ./CONTRIBUTING.md
     ./Gemfile
     ./Gemfile.lock
+    ./Guardfile
     ./LICENSE
     ./README.md
     ./Rakefile
@@ -46,7 +47,7 @@ Fast and easy access to all resources the Billomat API provides (not all resourc
     ./spec/badbill/invoice_spec.rb
     ./spec/badbill/recurring_spec.rb
     ./spec/badbill_spec.rb
-    ./spec/helper.rb
+    ./spec/spec_helper.rb
   ]
   # = MANIFEST =
 
