@@ -40,7 +40,9 @@ class BadBill
     #                        all parameters.
     def pdf
       resp = get resource_name, "#{id}/pdf"
-      resp.pdf
+      ret = resp.pdf
+      ret.id = ret.id.to_i
+      ret
     end
 
     # Closes a statement in the draft status (DRAFT). Here, the

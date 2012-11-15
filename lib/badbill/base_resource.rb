@@ -40,10 +40,10 @@ class BadBill
         []
       when 1
         data = all.__send__(resource_name).__send__(resource_name_singular)
-        [new(data.id, data)]
+        [new(data.id.to_i, data)]
       else
         all.__send__(resource_name).__send__(resource_name_singular).map do |res|
-          new res.id, res
+          new res.id.to_i, res
         end
       end
     end
@@ -79,7 +79,7 @@ class BadBill
       return res if res.error
 
       res_data = res.__send__(resource_name_singular)
-      new res_data.id, res_data
+      new res_data.id.to_i, res_data
     end
 
     # Save any changed data.
