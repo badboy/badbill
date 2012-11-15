@@ -87,8 +87,13 @@ class BadBill
     # @return [Boolean] True if successfull, false otherwise.
     def save
       @data.id = id
-      resp = put resource_name, id, {resource_name_singular => @data}
-      !resp
+      res = put resource_name, id, {resource_name_singular => @data}
+
+      return res if res.error
+
+      res_data = res.__send__(resource_name_singular)
+      @data = res_data
+      self
     end
 
     # Delete this resource.
