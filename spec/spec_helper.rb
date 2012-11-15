@@ -17,8 +17,26 @@ end
 
 require 'rspec'
 require 'webmock/rspec'
+require 'vcr'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  c.hook_into :webmock
+  c.default_cassette_options = { :record => :new_episodes }
+end
+
+RSpec.configure do |c|
+  c.extend VCR::RSpec::Macros
+end
 
 here = File.expand_path(File.dirname(__FILE__) + '/..')
 $LOAD_PATH.unshift here+'/lib'
+
+def new_badbill
+  fail('need BILLOMAT_KEY')     if ENV['BILLOMAT_KEY'].nil?
+  fail('need BILLOMAT_API_KEY') if ENV['BILLOMAT_API_KEY'].nil?
+
+  BadBill.new ENV['BILLOMAT_KEY'], ENV['BILLOMAT_API_KEY']
+end
 
 require 'badbill'

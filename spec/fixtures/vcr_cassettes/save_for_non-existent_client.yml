@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://rediger.billomat.net/api/clients/169500
+    body:
+      encoding: UTF-8
+      string: ! '{"client":{"name":"new name","id":169500}}'
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Thu, 15 Nov 2012 20:20:04 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze14
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Set-Cookie:
+      - language=de_DE; expires=Fri, 15-Nov-2013 20:20:04 GMT; path=/
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '36'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! '{"errors":{"error":"Row not found"}}'
+    http_version: 
+  recorded_at: Thu, 15 Nov 2012 20:20:04 GMT
+recorded_with: VCR 2.2.5

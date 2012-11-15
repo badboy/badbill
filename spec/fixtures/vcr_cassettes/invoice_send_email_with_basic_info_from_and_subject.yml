@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://rediger.billomat.net/api/invoices/352709/email
+    body:
+      encoding: UTF-8
+      string: ! '{"email":{"recipients":{"cc":"mail@test.example","to":"M8R-10apg01@mailinator.com"},"from":"sender@test.example","subject":"subject"}}'
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 14 Nov 2012 19:57:16 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze14
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Set-Cookie:
+      - language=de_DE; expires=Thu, 14-Nov-2013 19:57:16 GMT; path=/
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '0'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Wed, 14 Nov 2012 19:57:17 GMT
+recorded_with: VCR 2.2.5

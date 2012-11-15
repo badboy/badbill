@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://rediger.billomat.net/api/clients/
+    body:
+      encoding: UTF-8
+      string: ! '{"client":{"email":"this@is.invalid"}}'
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Date:
+      - Mon, 05 Nov 2012 15:46:42 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze14
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Set-Cookie:
+      - language=de_DE; expires=Tue, 05-Nov-2013 15:46:42 GMT; path=/
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '44'
+      Connection:
+      - close
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! '{"errors":{"error":"invalid email address"}}'
+    http_version: 
+  recorded_at: Mon, 05 Nov 2012 15:46:42 GMT
+recorded_with: VCR 2.2.5
