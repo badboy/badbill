@@ -27,8 +27,12 @@ class BadBill
 
       return all if all.error
 
-      all.__send__('invoice-groups').__send__('invoice-group').map do |res|
-        new res.id, res
+      data = all.__send__('invoice-groups').__send__('invoice-group')
+
+      if data.kind_of? Array
+        data
+      else
+        [data]
       end
     end
     # Get the PDF invoice.
