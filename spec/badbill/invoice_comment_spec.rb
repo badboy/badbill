@@ -17,9 +17,17 @@ describe BadBill::InvoiceComment do
 
   it "fetches all invoice-comments for PAYED status" do
     VCR.use_cassette("invoice-comments by invoice id and actionkey PAYMENT") do
-      resp = BadBill::InvoiceComment.all 360264, actionkey: 'PAYMENT'
+      resp = BadBill::InvoiceComment.all 360264, 'PAYMENT'
 
       resp.size.should eq(1)
+    end
+  end
+
+  it "fetches all invoice-comments for 2 actionkey params" do
+    VCR.use_cassette("invoice-comments by invoice id and actionkeys") do
+      resp = BadBill::InvoiceComment.all 360264, ['CREATE','PAYMENT']
+
+      resp.size.should eq(2)
     end
   end
 end
