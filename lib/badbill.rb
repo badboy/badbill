@@ -112,9 +112,12 @@ class BadBill
   rescue Faraday::Error::ClientError => error
     if error.response && error.response.has_key?(:body) && error.response[:body]
       body = error.response[:body]
-      Hashie::Mash.new :error => error, :body => ( body.kind_of?(Hash) ? body : JSON.parse(body) )
+      if !body.kind_of?(Hash) && ['{', '[', '"'].include?(body[0])
+        body = JSON.parse body
+      end
+      Hashie::Mash.new error: error, body: body
     else
-      Hashie::Mash.new :error => error
+      Hashie::Mash.new error: error
     end
   end
 
