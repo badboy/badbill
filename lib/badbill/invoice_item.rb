@@ -7,18 +7,11 @@ class BadBill
   class InvoiceItem < BaseResource
     # Get all resources of this type.
     #
-    # @param [Hash] filter An Hash of filter parameters,
-    #                      see the online documentation for allowed values.
+    # @param [Integer] invoice_id The invoice id to search for.
     #
-    # @return [Array<Resource>] All found resources.
+    # @return [Array<InvoiceItem>] All found invoice items.
     def self.all invoice_id
-      all = get resource_name, invoice_id: invoice_id
-      return all if all.error
-
-      items = all['invoice-items']['invoice-item'] || []
-      items.map do |res|
-        new res.id, res
-      end
+      super invoice_id: invoice_id
     end
   end
 end
