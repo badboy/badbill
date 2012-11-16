@@ -35,14 +35,15 @@ class BadBill
       all = get resource_name, filter
       return all if all.error
 
-      case all.__send__(resource_name)['@total'].to_i
+      resources = all.__send__(resource_name)
+      case resources['@total'].to_i
       when 0
         []
       when 1
-        data = all.__send__(resource_name).__send__(resource_name_singular)
+        data = resources.__send__(resource_name_singular)
         [new(data.id.to_i, data)]
       else
-        all.__send__(resource_name).__send__(resource_name_singular).map do |res|
+        resources.__send__(resource_name_singular).map do |res|
           new res.id.to_i, res
         end
       end
