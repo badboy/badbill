@@ -8,8 +8,12 @@ group :development do
   gem 'guard-rspec'
   gem 'fuubar'        # Guard output mode
   gem 'rb-inotify'    # Notification of test status (used by guard)
+end
 
+group :test do
+  gem 'rake'
   gem 'vcr'
+  gem 'rspec'
 end
 
 gemspec
