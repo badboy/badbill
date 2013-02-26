@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe BadBill::InvoiceComment do
   before :all do
-    @badbill = new_badbill
+    @badbill = new_badbill 1
   end
 
   it "fetches all invoice-comments" do

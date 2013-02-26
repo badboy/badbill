@@ -32,11 +32,23 @@ end
 here = File.expand_path(File.dirname(__FILE__) + '/..')
 $LOAD_PATH.unshift here+'/lib'
 
-def new_badbill
-  fail('need BILLOMAT_KEY')     if ENV['BILLOMAT_KEY'].nil?
-  fail('need BILLOMAT_API_KEY') if ENV['BILLOMAT_API_KEY'].nil?
+def new_badbill version
+  key = nil
+  id  = nil
 
-  BadBill.new ENV['BILLOMAT_KEY'], ENV['BILLOMAT_API_KEY']
+  # We need a working id/key combination just once,
+  # test cases are recorded through VCR for later use.
+  #
+  # Whenever a new test is added, get a new API key.
+  case version
+  when 1
+    id  = 'rediger'
+    key = 'e1923a9ab25fc955be3321725be882bd'
+  end
+  fail('need Billomat ID')      unless id
+  fail('need Billomat API key') unless key
+
+  BadBill.new id, key
 end
 
 require 'badbill'
