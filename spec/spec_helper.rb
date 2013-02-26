@@ -25,10 +25,6 @@ VCR.configure do |c|
   c.default_cassette_options = { :record => :new_episodes }
 end
 
-RSpec.configure do |c|
-  c.extend VCR::RSpec::Macros
-end
-
 here = File.expand_path(File.dirname(__FILE__) + '/..')
 $LOAD_PATH.unshift here+'/lib'
 
