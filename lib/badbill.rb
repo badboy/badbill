@@ -8,6 +8,8 @@ require 'yajl/json_gem'
 require 'faraday_middleware'
 require 'hashie/mash'
 
+require_relative 'badbill/faraday_gzip'
+
 require_relative 'badbill/resource'
 require_relative 'badbill/forward_methods'
 require_relative 'badbill/base_resource'
@@ -164,6 +166,7 @@ class BadBill
 
       conn.response :mashify
       conn.response :json, :content_type => /\bjson$/
+      conn.response :gzip
       #conn.response :logger
       conn.response :raise_error
       conn.adapter  :net_http
