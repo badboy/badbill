@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.5") if s.respond_to? :required_rubygems_version=
 
   s.name    = 'badbill'
-  s.version = '0.0.3dev'
+  s.version = '0.1.0'
 
   s.summary     = "Simple but working API client for the Billomat API."
   s.description = <<-EOF
@@ -34,6 +34,7 @@ Fast and easy access to all resources the Billomat API provides (not all resourc
     ./lib/badbill.rb
     ./lib/badbill/base_resource.rb
     ./lib/badbill/client.rb
+    ./lib/badbill/faraday_gzip.rb
     ./lib/badbill/forward_methods.rb
     ./lib/badbill/invoice.rb
     ./lib/badbill/invoice_comment.rb

@@ -35,7 +35,7 @@ require_relative 'badbill/recurring'
 #     billo.get 'clients'
 #     # => {"clients"=>{"client"=>[...]}}
 class BadBill
-  VERSION = '0.0.3dev'
+  VERSION = '0.1.0'
 
   # Reject any not allowed HTTP method.
   class NotAllowedException < Exception; end
