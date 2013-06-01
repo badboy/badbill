@@ -1,0 +1,72 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://rediger.billomat.net/api/clients/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        TW9uLCAwNSBOb3YgMjAxMiAxNTowODoxNiBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        QXBhY2hl
+      !binary "WC1Qb3dlcmVkLUJ5":
+      - !binary |-
+        UEhQLzUuMy4zLTcrc3F1ZWV6ZTE0
+      !binary "RXhwaXJlcw==":
+      - !binary |-
+        VGh1LCAxOSBOb3YgMTk4MSAwODo1MjowMCBHTVQ=
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tc3RvcmUsIG5vLWNhY2hlLCBtdXN0LXJldmFsaWRhdGUsIHBvc3QtY2hl
+        Y2s9MCwgcHJlLWNoZWNrPTA=
+      !binary "UHJhZ21h":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        bGFuZ3VhZ2U9ZGVfREU7IGV4cGlyZXM9VHVlLCAwNS1Ob3YtMjAxMyAxNTow
+        ODoxNiBHTVQ7IHBhdGg9Lw==
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        NDUx
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA31TX2/aMBD/KsivA+QEaEeemFpUbZM6qaUPlSZFxnbCtYlt
+        2Q4pq/juOztRgdI2D9H9/tz57uK8El6BVN6R7LUPQwSCZCS5mE/nczIk3Erm
+        ZaBSmqSjJBnRySqZZOkso7NvNMkoDa6YnaumXkuL3ilyH4DcWIlEwKwO0S+m
+        RksLz4M7KaBE95A4VjWeedCqcxZgHVY+9SNfsQN9lO2tlDgG+f23obS4UFC6
+        TQx5KatBOkHPPzBomKX0MnTGwe8Q/mB8I1WsgPN2R3PdKG93OdciMNdL5MxG
+        q14u2EsX1HoNVU/KmkGF4ZO0C2vXaB4rbGhI2rbtHJ69HBaFeMv8CV4z9Zwz
+        Hg/PdatO+DNjv4H3eWc+10LhjzDg+9CPbWL/V38ebld3j0gKcF0hi9vI/c4E
+        +X65Wv28vbl/r3d13ijBdu6rlKCHKxa2Lxr5qb+XkJ0kiK2sQQm8RF/knHlQ
+        vkReFwWSW1aBwM/9WfYHLjSE+20scJmXVjemZ5SOc7uNNiMQ2aDrcCtVE30u
+        TkjHND5Hmoq38/t42gn7IVkYVoZSocLChJ+kxzFv4bVnVZT3+/9GOLqgsgMA
+        AA==
+    http_version: 
+  recorded_at: Mon, 05 Nov 2012 15:08:16 GMT
+recorded_with: VCR 2.2.5

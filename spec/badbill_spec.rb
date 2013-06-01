@@ -84,7 +84,7 @@ describe BadBill do
         to_return(:status => 404)
 
       resp = @badbill.get 'resource'
-      resp.error.kind_of?(Faraday::Error::ClientError).should == true
+      resp.error.should be_a(Faraday::Error::ClientError)
       stub.should have_been_requested
     end
   end

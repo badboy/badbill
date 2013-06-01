@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://rediger.billomat.net/api/invoice-comments/?invoice_id=360264
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        RnJpLCAxNiBOb3YgMjAxMiAyMjoxMToxMSBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        QXBhY2hl
+      !binary "WC1Qb3dlcmVkLUJ5":
+      - !binary |-
+        UEhQLzUuMy4zLTcrc3F1ZWV6ZTE0
+      !binary "RXhwaXJlcw==":
+      - !binary |-
+        VGh1LCAxOSBOb3YgMTk4MSAwODo1MjowMCBHTVQ=
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tc3RvcmUsIG5vLWNhY2hlLCBtdXN0LXJldmFsaWRhdGUsIHBvc3QtY2hl
+        Y2s9MCwgcHJlLWNoZWNrPTA=
+      !binary "UHJhZ21h":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        bGFuZ3VhZ2U9ZGVfREU7IGV4cGlyZXM9U2F0LCAxNi1Ob3YtMjAxMyAyMjox
+        MToxMSBHTVQ7IHBhdGg9Lw==
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        MzA4
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA6WQTWvDMAyG/4rRdUmRnTTdfGoYOW6MNjvsi+G6SlqaOiNx
+        OraS/z67a2FksB0KxlivX0mPtIe12dVrTaGut1sytgW5H2ogn5y2BAmcI59M
+        riAA3ZCy5DWBXISchzzJhZARl+PoArlEdK5joddDcpSgSGKndi01R2kcJxNf
+        7dQIZqRXpjMlo6a1VFV25L6VtuvabOjDGa5nWZpn0Ac/kS7xH6TkDKS5VbZr
+        WUnPHSLFZkmNZbvasMzY964pmFF6xeqiIDOEnedpfj8fwvK/YIXk8Rmwj2pV
+        +fV51kIvqGEcA0QfKncLVJo5Z0klGXcOeSOWbmznlu3c38NKtqBPV+nX9u/S
+        h5vsNof+JYDpmyrJDwX+7ZBO8QF9amurKs8Iff8FRsBuP2cCAAA=
+    http_version: 
+  recorded_at: Fri, 16 Nov 2012 22:11:11 GMT
+recorded_with: VCR 2.2.5

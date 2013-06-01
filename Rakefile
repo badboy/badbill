@@ -77,7 +77,7 @@ task :gemspec do
     split("\n").
     sort.
     reject { |file| file =~ /^\./ }.
-    reject { |file| file =~ /^(doc|coverage|pkg)/ }.
+    reject { |file| file =~ /^(doc|coverage|pkg|contrib)/ }.
     map { |file| "    ./#{file}" }.
     join("\n")
 

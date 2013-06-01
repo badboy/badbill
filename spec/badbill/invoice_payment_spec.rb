@@ -4,27 +4,14 @@ require 'spec_helper'
 
 describe BadBill::InvoicePayment do
   before :all do
-    @badbill = BadBill.new "ruby", "12345"
+    @badbill = new_badbill 1
   end
 
   it "fetches all invoice-payments" do
-    body = {
-      'invoice-payments' => {
-        'invoice-payment' => {
-          id: 1
-        },
-        '@total' => 1
-      }
-    }
-    stub = stub_request(:get, "ruby.billomat.net/api/invoice-payments/").
-      with(:headers => {'Accept' => 'application/json'}).
-      to_return(:body => body,
-               :headers => {'Content-Type' => 'application/json'})
+    VCR.use_cassette('invoice payments') do
+      resp = BadBill::InvoicePayment.all
 
-    resp = BadBill::InvoicePayment.all
-    stub.should have_been_requested
-
-    resp.size.should == 1
-    resp.first.id.should == 1
+      resp.size.should eq(0)
+    end
   end
 end

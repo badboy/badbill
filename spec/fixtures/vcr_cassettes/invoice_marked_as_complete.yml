@@ -1,0 +1,95 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://rediger.billomat.net/api/invoices/352709/complete
+    body:
+      encoding: UTF-8
+      string: ! '{"complete":{}}'
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Date:
+      - Wed, 14 Nov 2012 19:15:01 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze14
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Set-Cookie:
+      - language=de_DE; expires=Thu, 14-Nov-2013 19:15:01 GMT; path=/
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '57'
+      Connection:
+      - close
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! '{"errors":{"error":"Only status DRAFT can be completed"}}'
+    http_version: 
+  recorded_at: Wed, 14 Nov 2012 19:15:01 GMT
+- request:
+    method: put
+    uri: http://rediger.billomat.net/api/invoices/352320/complete
+    body:
+      encoding: UTF-8
+      string: ! '{"complete":{}}'
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 14 Nov 2012 19:16:38 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze14
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Set-Cookie:
+      - language=de_DE; expires=Thu, 14-Nov-2013 19:16:38 GMT; path=/
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '0'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Wed, 14 Nov 2012 19:16:39 GMT
+recorded_with: VCR 2.2.5

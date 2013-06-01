@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://rediger.billomat.net/api/clients/169499
+    body:
+      encoding: UTF-8
+      string: ! '{"client":{"id":169499,"created":"2012-11-03T13:25:05+01:00","client_number":"4","number":"4","number_pre":"","name":"new
+        name","salutation":"","first_name":"Jan-Erik","last_name":"Rediger","street":"Königshügel
+        23","zip":"52074","city":"Aachen","state":"","country_code":"DE","phone":"","fax":"","mobile":"","email":"jer@rrbone.net","www":"","tax_number":"","vat_number":"","bank_account_owner":"","bank_number":"","bank_name":"","bank_account_number":"","bank_swift":"","bank_iban":"","tax_rule":"COUNTRY","discount_rate_type":"SETTINGS","discount_rate":"","discount_days_type":"SETTINGS","discount_days":"14","due_days_type":"SETTINGS","due_days":"31","reminder_due_days_type":"SETTINGS","reminder_due_days":"7","offer_validity_days_type":"SETTINGS","offer_validity_days":"0","price_group":"0","note":"shop-id:
+        1","revenue_gross":"10.000000","revenue_net":"8.400000"}}'
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 15 Nov 2012 20:15:33 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze14
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Set-Cookie:
+      - language=de_DE; expires=Fri, 15-Nov-2013 20:15:33 GMT; path=/
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '883'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! '{"client":{"id":"169499","created":"2012-11-03T13:25:05+01:00","client_number":"4","number":"4","number_pre":"","name":"new
+        name","salutation":"","first_name":"Jan-Erik","last_name":"Rediger","street":"K\u00f6nigsh\u00fcgel
+        23","zip":"52074","city":"Aachen","state":"","country_code":"DE","phone":"","fax":"","mobile":"","email":"jer@rrbone.net","www":"","tax_number":"","vat_number":"","bank_account_owner":"","bank_number":"","bank_name":"","bank_account_number":"","bank_swift":"","bank_iban":"","tax_rule":"COUNTRY","discount_rate_type":"SETTINGS","discount_rate":"","discount_days_type":"SETTINGS","discount_days":"14","due_days_type":"SETTINGS","due_days":"31","reminder_due_days_type":"SETTINGS","reminder_due_days":"7","offer_validity_days_type":"SETTINGS","offer_validity_days":"0","price_group":"0","note":"shop-id:
+        1","revenue_gross":"10.000000","revenue_net":"8.400000"}}'
+    http_version: 
+  recorded_at: Thu, 15 Nov 2012 20:15:33 GMT
+recorded_with: VCR 2.2.5

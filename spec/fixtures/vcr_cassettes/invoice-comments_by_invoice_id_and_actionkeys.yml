@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://rediger.billomat.net/api/invoice-comments/?actionkey=CREATE,PAYMENT&invoice_id=360264
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        RnJpLCAxNiBOb3YgMjAxMiAyMjoxNDo0NCBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        QXBhY2hl
+      !binary "WC1Qb3dlcmVkLUJ5":
+      - !binary |-
+        UEhQLzUuMy4zLTcrc3F1ZWV6ZTE0
+      !binary "RXhwaXJlcw==":
+      - !binary |-
+        VGh1LCAxOSBOb3YgMTk4MSAwODo1MjowMCBHTVQ=
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tc3RvcmUsIG5vLWNhY2hlLCBtdXN0LXJldmFsaWRhdGUsIHBvc3QtY2hl
+        Y2s9MCwgcHJlLWNoZWNrPTA=
+      !binary "UHJhZ21h":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        bGFuZ3VhZ2U9ZGVfREU7IGV4cGlyZXM9U2F0LCAxNi1Ob3YtMjAxMyAyMjox
+        NDo0NCBHTVQ7IHBhdGg9Lw==
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        MjYz
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA6WPT0vDQBDFv0qYq0mZ2aSJ7qlBclSk5uI/ZLuOaWiaSLIR
+        tOS7OxtaEAUvwrLsvH3z5jcHqNv3rrYc2W6/59YNoA8/NdAPor2ABiKkLLuA
+        EGzPxrHXFJKKiCJKS6V0THoZnyFpRHEdg57n5jhFlSaijgP3R2mZpJlPOw2C
+        NdttO7ZVwP3guGncQr6NdXXX7vhDDJfrIi8LmMLvSOf0F5LSlPwD6d5sG0/0
+        OCK+2g33AWGI6Esjt0JjA3FWXHErZ+5bBPnOjcIv7ltn3DjoYMOfkvRroZv8
+        7qq4LmF6CmH1Zir2S4F/C9KpntFXrnOm8fvBNH0Bk0k9ALoBAAA=
+    http_version: 
+  recorded_at: Fri, 16 Nov 2012 22:14:44 GMT
+recorded_with: VCR 2.2.5

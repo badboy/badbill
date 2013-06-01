@@ -36,17 +36,47 @@ Fast and easy access to all resources the Billomat API provides (not all resourc
     ./lib/badbill/client.rb
     ./lib/badbill/forward_methods.rb
     ./lib/badbill/invoice.rb
+    ./lib/badbill/invoice_comment.rb
     ./lib/badbill/invoice_item.rb
     ./lib/badbill/invoice_payment.rb
     ./lib/badbill/recurring.rb
     ./lib/badbill/resource.rb
     ./spec/badbill/base_resource_spec.rb
     ./spec/badbill/client_spec.rb
+    ./spec/badbill/invoice_comment_spec.rb
     ./spec/badbill/invoice_item_spec.rb
     ./spec/badbill/invoice_payment_spec.rb
     ./spec/badbill/invoice_spec.rb
     ./spec/badbill/recurring_spec.rb
     ./spec/badbill_spec.rb
+    ./spec/fixtures/vcr_cassettes/aggregated_invoices.yml
+    ./spec/fixtures/vcr_cassettes/all_clients.yml
+    ./spec/fixtures/vcr_cassettes/all_invoices.yml
+    ./spec/fixtures/vcr_cassettes/all_recurring_invoices.yml
+    ./spec/fixtures/vcr_cassettes/client_on_change.yml
+    ./spec/fixtures/vcr_cassettes/draft_item.yml
+    ./spec/fixtures/vcr_cassettes/existent_client.yml
+    ./spec/fixtures/vcr_cassettes/fetched_invoice_pdf.yml
+    ./spec/fixtures/vcr_cassettes/fetches_invoice-item_by_id.yml
+    ./spec/fixtures/vcr_cassettes/invoice-comments_by_invoice_id.yml
+    ./spec/fixtures/vcr_cassettes/invoice-comments_by_invoice_id_and_actionkey_PAYMENT.yml
+    ./spec/fixtures/vcr_cassettes/invoice-comments_by_invoice_id_and_actionkeys.yml
+    ./spec/fixtures/vcr_cassettes/invoice_canceled.yml
+    ./spec/fixtures/vcr_cassettes/invoice_deleted.yml
+    ./spec/fixtures/vcr_cassettes/invoice_info.yml
+    ./spec/fixtures/vcr_cassettes/invoice_marked_as_complete.yml
+    ./spec/fixtures/vcr_cassettes/invoice_payments.yml
+    ./spec/fixtures/vcr_cassettes/invoice_send_email_with_basic_info.yml
+    ./spec/fixtures/vcr_cassettes/invoice_send_email_with_basic_info_and_from.yml
+    ./spec/fixtures/vcr_cassettes/invoice_send_email_with_basic_info_from_and_subject.yml
+    ./spec/fixtures/vcr_cassettes/invoice_send_mail.yml
+    ./spec/fixtures/vcr_cassettes/invoice_send_mail_invalid_address.yml
+    ./spec/fixtures/vcr_cassettes/invoice_uploaded_signature.yml
+    ./spec/fixtures/vcr_cassettes/myself_client.yml
+    ./spec/fixtures/vcr_cassettes/new_client.yml
+    ./spec/fixtures/vcr_cassettes/non_existent_client.yml
+    ./spec/fixtures/vcr_cassettes/save_for_non-existent_client.yml
+    ./spec/fixtures/vcr_cassettes/wrong_data_for_client.yml
     ./spec/spec_helper.rb
   ]
   # = MANIFEST =

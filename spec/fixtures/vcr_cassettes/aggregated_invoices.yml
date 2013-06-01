@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://rediger.billomat.net/api/invoices/?group_by=client
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        TW9uLCAwNSBOb3YgMjAxMiAxNjowNDowMSBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        QXBhY2hl
+      !binary "WC1Qb3dlcmVkLUJ5":
+      - !binary |-
+        UEhQLzUuMy4zLTcrc3F1ZWV6ZTE0
+      !binary "RXhwaXJlcw==":
+      - !binary |-
+        VGh1LCAxOSBOb3YgMTk4MSAwODo1MjowMCBHTVQ=
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tc3RvcmUsIG5vLWNhY2hlLCBtdXN0LXJldmFsaWRhdGUsIHBvc3QtY2hl
+        Y2s9MCwgcHJlLWNoZWNrPTA=
+      !binary "UHJhZ21h":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        bGFuZ3VhZ2U9ZGVfREU7IGV4cGlyZXM9VHVlLCAwNS1Ob3YtMjAxMyAxNjow
+        NDowMiBHTVQ7IHBhdGg9Lw==
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        MTI5
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA6tWyswry89MTtVNL8ovLShWsqpGFQEJlOSXJObEA7nFQHkl
+        QyMTPQMDJR2ocF5qCUjQwETPCCSYnJOZmlcSn5kCEjSzNLG0BArCTCxILErM
+        BduBRVltrY6SQ3JpUVFqXnJlfHJ+SipQzjU0CCgBAA/wgs+mAAAA
+    http_version: 
+  recorded_at: Mon, 05 Nov 2012 16:04:03 GMT
+recorded_with: VCR 2.2.5

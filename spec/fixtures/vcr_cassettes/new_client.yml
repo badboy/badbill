@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://rediger.billomat.net/api/clients/
+    body:
+      encoding: UTF-8
+      string: ! '{"client":{"name":"Musterfirma","salutation":"Herr","first_name":"Max","last_name":"Muster","street":"Musterstraße
+        123","zip":"12345","city":"Musterstadt","state":"Bundesland","country_code":"DE"}}'
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Mon, 05 Nov 2012 15:44:26 GMT
+      Server:
+      - Apache
+      X-Powered-By:
+      - PHP/5.3.3-7+squeeze14
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Set-Cookie:
+      - language=de_DE; expires=Tue, 05-Nov-2013 15:44:26 GMT; path=/
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '857'
+      Content-Type:
+      - application/json
+    body:
+      encoding: US-ASCII
+      string: ! '{"client":{"id":"170675","created":"2012-11-05T16:44:26+01:00","client_number":"5","number":"5","number_pre":"","name":"Musterfirma","salutation":"Herr","first_name":"Max","last_name":"Muster","street":"Musterstra\u00dfe
+        123","zip":"12345","city":"Musterstadt","state":"Bundesland","country_code":"GB","phone":"","fax":"","mobile":"","email":"","www":"","tax_number":"","vat_number":"","bank_account_owner":"","bank_number":"","bank_name":"","bank_account_number":"","bank_swift":"","bank_iban":"","tax_rule":"COUNTRY","discount_rate_type":"SETTINGS","discount_rate":"","discount_days_type":"SETTINGS","discount_days":"14","due_days_type":"SETTINGS","due_days":"31","reminder_due_days_type":"SETTINGS","reminder_due_days":"7","offer_validity_days_type":"SETTINGS","offer_validity_days":"0","price_group":"0","note":"","revenue_gross":"0","revenue_net":"0"}}'
+    http_version: 
+  recorded_at: Mon, 05 Nov 2012 15:44:26 GMT
+recorded_with: VCR 2.2.5

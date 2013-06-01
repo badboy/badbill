@@ -35,15 +35,16 @@ class BadBill
       all = get resource_name, filter
       return all if all.error
 
-      case all.__send__(resource_name)['@total'].to_i
+      resources = all.__send__(resource_name)
+      case resources['@total'].to_i
       when 0
         []
       when 1
-        data = all.__send__(resource_name).__send__(resource_name_singular)
-        [new(data.id, data)]
+        data = resources.__send__(resource_name_singular)
+        [new(data.id.to_i, data)]
       else
-        all.__send__(resource_name).__send__(resource_name_singular).map do |res|
-          new res.id, res
+        resources.__send__(resource_name_singular).map do |res|
+          new res.id.to_i, res
         end
       end
     end
@@ -79,16 +80,27 @@ class BadBill
       return res if res.error
 
       res_data = res.__send__(resource_name_singular)
-      new res_data.id, res_data
+      new res_data.id.to_i, res_data
     end
 
     # Save any changed data.
     #
-    # @return [Boolean] True if successfull, false otherwise.
+    # @return [Resource] The instance with changed values or the error object.
     def save
-      @data.id = id
-      resp = put resource_name, id, {resource_name_singular => @data}
-      !resp
+      # Only save
+      if @__mutated__ && !@__mutated__.empty?
+        data = Hash[@__mutated__.map { |k| [k, @data[k]] }]
+
+        res = put resource_name, id, {resource_name_singular => data}
+
+        return res if res.error
+
+        res_data = res.__send__(resource_name_singular)
+        @data.merge!(res_data)
+        @__mutated__.clear
+      end
+
+      self
     end
 
     # Delete this resource.

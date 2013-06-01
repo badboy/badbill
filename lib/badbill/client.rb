@@ -17,7 +17,7 @@ class BadBill
     # @return [Client] A new resource.
     def self.myself
       c = get 'clients', 'myself'
-      client = new c.client.id, c.client
+      client = new c.client.id.to_i, c.client
       client.myself = true
       client
     end

@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://rediger.billomat.net/api/invoices/352320
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Billomatapikey:
+      - e1923a9ab25fc955be3321725be882bd
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "RGF0ZQ==":
+      - !binary |-
+        V2VkLCAxNCBOb3YgMjAxMiAxOToxNjozMSBHTVQ=
+      !binary "U2VydmVy":
+      - !binary |-
+        QXBhY2hl
+      !binary "WC1Qb3dlcmVkLUJ5":
+      - !binary |-
+        UEhQLzUuMy4zLTcrc3F1ZWV6ZTE0
+      !binary "RXhwaXJlcw==":
+      - !binary |-
+        VGh1LCAxOSBOb3YgMTk4MSAwODo1MjowMCBHTVQ=
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bm8tc3RvcmUsIG5vLWNhY2hlLCBtdXN0LXJldmFsaWRhdGUsIHBvc3QtY2hl
+        Y2s9MCwgcHJlLWNoZWNrPTA=
+      !binary "UHJhZ21h":
+      - !binary |-
+        bm8tY2FjaGU=
+      !binary "U2V0LUNvb2tpZQ==":
+      - !binary |-
+        bGFuZ3VhZ2U9ZGVfREU7IGV4cGlyZXM9VGh1LCAxNC1Ob3YtMjAxMyAxOTox
+        NjozMSBHTVQ7IHBhdGg9Lw==
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        NDMx
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbg==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA2WSX2/bIBDAv0qEtKc1EWAnTfwWKdlDu0lVmj5MioQoJg6a
+        DR6GtVaU7z4Ou6jenrj7Hff/rkjpP0YJiYorUiUqULakGcXoDgkruZOAKCZ0
+        TsgcZ0eyLrJVgclXTAocf9VKaseiK1lt8s0mwDEm0755lRYiBJiUJLPWykEv
+        Q6ZJosA637Z1z0bTFDDXt0CfX56evv9ku+1xD1G8ZJNIdI7zxPsOuiNB52Vp
+        ZQfqA9fzvVW/ZgdZqkrak/6fPJ48xueVVlV3iaKoZD2j2UkvKb7PZ1suLlKf
+        9E5614lLzXUJxTruPKTYHbbfjlCE6oTxYVQ2NZTQP+2T+6kxVk7yz5A38AQM
+        O6j5q6yHkEo7a8YZm488zjhes8qa2DMh+SKubsBaQpjNcrGO6/TWSi16JkwJ
+        3vuXQ6C//RCLBMfoamXphVNGB7j8Mk3BvI7meDqE4g+flG7yISaO9pb3DZwS
+        rLYbC+fvIF5BgEfzBsr48fbsoIhhagQuLs2DrBc06Z+aQ7fbHTLnc7i6eKvQ
+        q9FnZRsOfSRoJYxA6Wokt9tfY3JoCSMDAAA=
+    http_version: 
+  recorded_at: Wed, 14 Nov 2012 19:16:31 GMT
+recorded_with: VCR 2.2.5

@@ -8,6 +8,8 @@ require 'yajl/json_gem'
 require 'faraday_middleware'
 require 'hashie/mash'
 
+require_relative 'badbill/faraday_gzip'
+
 require_relative 'badbill/resource'
 require_relative 'badbill/forward_methods'
 require_relative 'badbill/base_resource'
@@ -16,6 +18,7 @@ require_relative 'badbill/client'
 require_relative 'badbill/invoice'
 require_relative 'badbill/invoice_payment'
 require_relative 'badbill/invoice_item'
+require_relative 'badbill/invoice_comment'
 require_relative 'badbill/recurring'
 
 # Handles the connection and requests to the Billomat API.
@@ -38,6 +41,8 @@ class BadBill
   class NotAllowedException < Exception; end
   # Fail if no global connection is set.
   class NoConnection < Exception; end
+  # Fail without API key and Billomat ID
+  class MissingConfiguration < Exception; end
 
   # The API url used for all connections.
   API_URL = 'http%s://%s.billomat.net/'
@@ -52,6 +57,10 @@ class BadBill
   def initialize billomat_id, api_key, ssl=false
     @billomat_id  = billomat_id
     @api_key      = api_key
+
+    raise MissingConfiguration.new("Billomat ID missing") if @billomat_id.nil?
+    raise MissingConfiguration.new("API Key missing")     if @api_key.nil?
+
     @ssl          = ssl
     @http_adapter = connection
 
@@ -112,9 +121,12 @@ class BadBill
   rescue Faraday::Error::ClientError => error
     if error.response && error.response.has_key?(:body) && error.response[:body]
       body = error.response[:body]
-      Hashie::Mash.new :error => error, :body => ( body.kind_of?(Hash) ? body : JSON.parse(body) )
+      if !body.kind_of?(Hash) && ['{', '[', '"'].include?(body[0])
+        body = JSON.parse body
+      end
+      Hashie::Mash.new error: error, body: body
     else
-      Hashie::Mash.new :error => error
+      Hashie::Mash.new error: error
     end
   end
 
@@ -160,6 +172,7 @@ class BadBill
 
       conn.response :mashify
       conn.response :json, :content_type => /\bjson$/
+      conn.response :gzip
       #conn.response :logger
       conn.response :raise_error
       conn.adapter  :net_http
