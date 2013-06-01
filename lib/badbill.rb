@@ -41,6 +41,8 @@ class BadBill
   class NotAllowedException < Exception; end
   # Fail if no global connection is set.
   class NoConnection < Exception; end
+  # Fail without API key and Billomat ID
+  class MissingConfiguration < Exception; end
 
   # The API url used for all connections.
   API_URL = 'http%s://%s.billomat.net/'
@@ -55,6 +57,10 @@ class BadBill
   def initialize billomat_id, api_key, ssl=false
     @billomat_id  = billomat_id
     @api_key      = api_key
+
+    raise MissingConfiguration.new("Billomat ID missing") if @billomat_id.nil?
+    raise MissingConfiguration.new("API Key missing")     if @api_key.nil?
+
     @ssl          = ssl
     @http_adapter = connection
 
