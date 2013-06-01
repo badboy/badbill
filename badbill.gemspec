@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.5") if s.respond_to? :required_rubygems_version=
 
   s.name    = 'badbill'
-  s.version = '0.0.3dev'
+  s.version = '0.2.0dev'
 
   s.summary     = "Simple but working API client for the Billomat API."
   s.description = <<-EOF
