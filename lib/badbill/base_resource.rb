@@ -85,15 +85,21 @@ class BadBill
 
     # Save any changed data.
     #
-    # @return [Boolean] True if successfull, false otherwise.
+    # @return [Resource] The instance with changed values or the error object.
     def save
-      @data.id = id
-      res = put resource_name, id, {resource_name_singular => @data}
+      # Only save
+      if @__mutated__ && !@__mutated__.empty?
+        data = Hash[@__mutated__.map { |k| [k, @data[k]] }]
 
-      return res if res.error
+        res = put resource_name, id, {resource_name_singular => data}
 
-      res_data = res.__send__(resource_name_singular)
-      @data = res_data
+        return res if res.error
+
+        res_data = res.__send__(resource_name_singular)
+        @data.merge!(res_data)
+        @__mutated__.clear
+      end
+
       self
     end
 

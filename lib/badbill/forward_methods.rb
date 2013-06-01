@@ -11,6 +11,12 @@ class BadBill
     # assignment request, we only check for the method name without the equal sign.
     def method_missing(method_name, *arguments, &block)
       if data.respond_to?(method_name.to_s.sub(/=$/, ''))
+        if method_name.to_s.end_with?('=')
+          @__mutated__ ||= []
+          @__mutated__ << method_name.to_s.sub(/=$/, '')
+          @__mutated__.uniq!
+        end
+
         data.send(method_name, *arguments, &block)
       else
         super
