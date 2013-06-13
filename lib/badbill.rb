@@ -9,6 +9,7 @@ require 'faraday_middleware'
 require 'hashie/mash'
 
 require_relative 'badbill/faraday_gzip'
+require_relative 'badbill/multiple_accounts'
 
 require_relative 'badbill/resource'
 require_relative 'badbill/forward_methods'
@@ -35,14 +36,15 @@ require_relative 'badbill/recurring'
 #     billo.get 'clients'
 #     # => {"clients"=>{"client"=>[...]}}
 class BadBill
+  # Current version
   VERSION = '0.2.0dev'
 
   # Reject any not allowed HTTP method.
   class NotAllowedException < Exception; end
-  # Fail if no global connection is set.
-  class NoConnection < Exception; end
   # Fail without API key and Billomat ID
   class MissingConfiguration < Exception; end
+
+  include MultipleAccounts
 
   # The API url used for all connections.
   API_URL = 'http%s://%s.billomat.net/'
@@ -63,28 +65,7 @@ class BadBill
 
     @ssl          = ssl
     @http_adapter = connection
-
-    BadBill.connection = self
   end
-
-  # Assign global BadBill connection object.
-  #
-  # @param [BadBill] connection The connection object.
-  def self.connection= connection
-    @connection = connection
-  end
-
-  # Get the global connection object.
-  #
-  # @return [BadBill, nil] The global connection object or nil if not set.
-  def self.connection
-    @connection
-  end
-
-  def self.clear_connection
-    @connection = nil
-  end
-
 
   # Call the specified resource.
   #

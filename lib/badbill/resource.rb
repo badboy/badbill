@@ -27,8 +27,7 @@ class BadBill
 
     # @param (see BadBill#call)
     def call resource, id='', options=nil, method=:get
-      raise BadBill::NoConnection, "No connection. Use BadBill.new first." if BadBill.connection.nil?
-      BadBill.connection.call resource, id, options, method
+      connection.call resource, id, options, method
     end
   end
 end

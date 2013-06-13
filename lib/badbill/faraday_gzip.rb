@@ -3,7 +3,9 @@
 require 'zlib'
 require 'faraday_middleware/response_middleware'
 
+# Extend Faraday with some middleware
 module FaradayMiddleware
+  # Force Gzip decoding if needed.
   class Gzip < ResponseMiddleware
     define_parser do |body|
       Zlib::GzipReader.new(StringIO.new(body)).read

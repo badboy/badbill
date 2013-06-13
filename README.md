@@ -30,6 +30,10 @@ The following resources are currently implemented as its own class:
 
 Implementing new resources is easy. Pull Requests for others are welcome.
 
+### API changed in Version 0.2.0
+
+The API changed in version 0.2.0. It's now possible to use multiple accounts. Just don't access the resource classes directly, but use `BadBill#client` and similar methods (See the examples).
+
 ## Requirements
 
 * [yajl-ruby](https://github.com/brianmario/yajl-ruby)
@@ -60,12 +64,12 @@ BadBill is just a `gem install badbill` away. Get an API key for the Billomat AP
 
 ### Using defined resource classes
 
-    BadBill.new "billo", "18e40e14"
+    badbill = BadBill.new "billo", "18e40e14"
 
-    BadBill::Invoice.all
-    # => [#<BadBill::Invoice:0x000000024caf98 @id="1" @data={...}>], ...]
+    badbill.invoice.all
+    # => [#<BadBill::Invoice:0x000000024caf98 @id="1" @data={...}>, ...]
 
-    invoice = BadBill::Invoice.find(1)
+    invoice = badbill.invoice.find(1)
     invoice.pdf
     # => {"id"=>"1",
     #     "created"=>"2012-09-17T13:58:42+02:00",
@@ -77,7 +81,7 @@ BadBill is just a `gem install badbill` away. Get an API key for the Billomat AP
     invoice.delete
     # => true
 
-    BadBill::Invoice.create client_id: 1, date: "2012-09-18", note: "Thank you for your order", ...
+    badbill.invoice.create client_id: 1, date: "2012-09-18", note: "Thank you for your order", ...
 
 ## Documentation
 

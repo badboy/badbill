@@ -1,28 +1,46 @@
 # encoding: utf-8
 
 class BadBill
+  # A abstract base resource from which all real resources inherit.
   class BaseResource
     include BadBill::Resource
-    extend BadBill::Resource
 
     include BadBill::ForwardMethods
 
     # ID of the resource.
-    attr_reader   :id
+    attr_accessor :id
     # All data in a Hash.
     attr_accessor :data
 
     # Public: Create new resource object.
     #
-    # @param [String,Integer] id The ID of the resource.
-    # @param [Hashie::Mash] data Resource data.
-    #
-    # All resources have an ID and data. Methods are proxied to the data object.
+    # @param [BadBill] connection The connection to use.
     #
     # @return [Resource] A new resource.
-    def initialize id, data
-      @id   = id
-      @data = data
+    def initialize connection
+      @__connection__ = connection
+    end
+
+    # TODO: should be private?
+    # Public: Create a new resource object with id and data and inherit the connection
+    #
+    # @param [String,Integer] id The ID of the resource
+    # @param [Hashie::Mash] data Resource data
+    #
+    # @return [Resource] A new resource.
+    def new_with_data id, data
+      obj      = self.class.new @__connection__
+      obj.id   = id
+      obj.data = data
+
+      obj
+    end
+
+    # Get the connection object for this resource.
+    #
+    # @return [BadBill] The connection object.
+    def connection
+      @__connection__
     end
 
     # Get all resources of this type.
@@ -31,7 +49,7 @@ class BadBill
     #                      see the online documentation for allowed values.
     #
     # @return [Array<Resource>] All found resources.
-    def self.all filter={}
+    def all filter={}
       all = get resource_name, filter
       return all if all.error
 
@@ -41,10 +59,10 @@ class BadBill
         []
       when 1
         data = resources.__send__(resource_name_singular)
-        [new(data.id.to_i, data)]
+        [new_with_data(data.id.to_i, data)]
       else
         resources.__send__(resource_name_singular).map do |res|
-          new res.id.to_i, res
+          new_with_data res.id.to_i, res
         end
       end
     end
@@ -54,7 +72,7 @@ class BadBill
     # @param [String,Integer] id ID of the resource.
     #
     # @return [Resource] New resource with id and data set.
-    def self.find id
+    def find id
       c = get resource_name, id
       if c.error
         if c.error.kind_of? Faraday::Error::ResourceNotFound
@@ -66,7 +84,7 @@ class BadBill
 
       data = c.__send__(resource_name_singular)
       return nil if data.nil?
-      new id, data
+      new_with_data id, data
     end
 
     # Create a new resource with the given parameters.
@@ -75,12 +93,12 @@ class BadBill
     #                      See the online documentation for allowed values.
     #
     # @return [Resource] New resource with id and data set.
-    def self.create params
+    def create params
       res = post(resource_name, {resource_name_singular => params})
       return res if res.error
 
       res_data = res.__send__(resource_name_singular)
-      new res_data.id.to_i, res_data
+      new_with_data res_data.id.to_i, res_data
     end
 
     # Save any changed data.
@@ -112,19 +130,22 @@ class BadBill
       !resp
     end
 
-    # Protect overriding of the ID.
+    # Return the error if any.
     #
-    # @raise [NoMethodError] because the ID may not be overwritten.
-    def id= *args
-      raise NoMethodError, "undefined method `id=' for '#{self.inspect.sub(/ .+/, '>')}`"
-    end
-
+    # @return [nil, Error] The error returned from the API
     def error
       if @data.respond_to?(:error)
         @data.error
       else
         nil
       end
+    end
+
+    # Inspect this resource
+    #
+    # @return [String] A stringified short version of important information.
+    def inspect
+      "<#{self.class.name}:0x#{__id__.to_s(16).rjust(14, '0')} @id=#{id.inspect} @data=#{data.inspect}>"
     end
 
     private

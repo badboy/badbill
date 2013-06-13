@@ -18,7 +18,7 @@ class BadBill
     #                                   aggregation.
     #
     # @return [Array<Invoices>] All found resources.
-    def self.group_by *type
+    def group_by *type
       if type.respond_to?(:join)
         type = type.join(',')
       end

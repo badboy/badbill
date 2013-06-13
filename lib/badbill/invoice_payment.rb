@@ -13,7 +13,7 @@ class BadBill
     #                  or not
     # @return [InvoicePayment,Hashie::Mash] New payment with id and data set
     #                                       or hash if any error happened
-    def self.create invoice_id, amount, is_paid=false, params={}
+    def create invoice_id, amount, is_paid=false, params={}
       params['invoice_id']           = invoice_id
       params['amount']               = amount
       params['mark_invoice_as_paid'] = is_paid
@@ -22,7 +22,7 @@ class BadBill
       return res if res.error
 
       res_data = res.__send__(resource_name_singular)
-      new res_data.id.to_i, res_data
+      new_with_data res_data.id.to_i, res_data
     end
   end
 end

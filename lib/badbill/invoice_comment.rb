@@ -11,7 +11,7 @@ class BadBill
     # @param [String,Array] actionkey Indicates what kind of comment it is. See API docu for possible values. An Array will be joined into a String.
     #
     # @return [Array<InvoiceComment>] All found invoice comments.
-    def self.all invoice_id, actionkey=nil
+    def all invoice_id, actionkey=nil
       params = { invoice_id: invoice_id }
       if actionkey
         actionkey = actionkey.join(',') if actionkey.respond_to?(:join)

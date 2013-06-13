@@ -10,7 +10,7 @@ class BadBill
     # @param [Integer] invoice_id The invoice id to search for.
     #
     # @return [Array<InvoiceItem>] All found invoice items.
-    def self.all invoice_id
+    def all invoice_id
       super invoice_id: invoice_id
     end
   end
