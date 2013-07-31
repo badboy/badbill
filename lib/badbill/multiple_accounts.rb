@@ -41,7 +41,7 @@ class BadBill
 
     # See {RecurringItem}
     def recurring_item
-      wrapped RecuringItem
+      wrapped RecurringItem
     end
     alias recurring_items recurring_item
 

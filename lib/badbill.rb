@@ -21,6 +21,7 @@ require_relative 'badbill/invoice_payment'
 require_relative 'badbill/invoice_item'
 require_relative 'badbill/invoice_comment'
 require_relative 'badbill/recurring'
+require_relative 'badbill/recurring_item'
 
 # Handles the connection and requests to the Billomat API.
 #
