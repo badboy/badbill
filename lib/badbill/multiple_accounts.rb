@@ -39,6 +39,12 @@ class BadBill
     end
     alias recurrings recurring
 
+    # See {RecurringItem}
+    def recurring_item
+      wrapped RecuringItem
+    end
+    alias recurring_items recurring_item
+
     private
     def wrapped obj
       Wrapper.new(obj, self)
