@@ -44,6 +44,8 @@ class BadBill
     #                        all parameters.
     def pdf
       resp = get resource_name, "#{id}/pdf"
+      return resp if resp.error
+
       ret = resp.pdf
       ret.id = ret.id.to_i
       ret
